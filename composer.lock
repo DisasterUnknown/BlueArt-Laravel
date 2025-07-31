@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24bfc494f214ecde0921328e4a2372d7",
+    "content-hash": "86837b8a364a2412c78d108e65d86aac",
     "packages": [
         {
             "name": "brick/math",
@@ -2008,16 +2008,16 @@
         },
         {
             "name": "mongodb/laravel-mongodb",
-            "version": "5.4.2",
+            "version": "5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mongodb/laravel-mongodb.git",
-                "reference": "161cb8c31359b32dfc0ded386405232bff59c0f0"
+                "reference": "60f48e50aadbd848795cd54fb7fa46c976fcb90f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mongodb/laravel-mongodb/zipball/161cb8c31359b32dfc0ded386405232bff59c0f0",
-                "reference": "161cb8c31359b32dfc0ded386405232bff59c0f0",
+                "url": "https://api.github.com/repos/mongodb/laravel-mongodb/zipball/60f48e50aadbd848795cd54fb7fa46c976fcb90f",
+                "reference": "60f48e50aadbd848795cd54fb7fa46c976fcb90f",
                 "shasum": ""
             },
             "require": {
@@ -2106,9 +2106,9 @@
             "support": {
                 "issues": "https://www.mongodb.com/support",
                 "security": "https://www.mongodb.com/security",
-                "source": "https://github.com/mongodb/laravel-mongodb/tree/5.4.2"
+                "source": "https://github.com/mongodb/laravel-mongodb/tree/5.4.3"
             },
-            "time": "2025-07-21T06:59:17+00:00"
+            "time": "2025-07-30T09:00:19+00:00"
         },
         {
             "name": "mongodb/mongodb",
