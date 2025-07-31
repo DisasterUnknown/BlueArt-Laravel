@@ -1,10 +1,14 @@
 # Use official PHP image with Apache
 FROM php:8.2-apache
 
-# Install system dependencies
+# Install dependencies
 RUN apt-get update && apt-get install -y \
-    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
+    git curl libpng-dev libonig-dev libxml2-dev zip unzip libcurl4-openssl-dev pkg-config libssl-dev \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install MongoDB PHP extension
+RUN pecl install mongodb \
+    && docker-php-ext-enable mongodb
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -12,7 +16,7 @@ RUN a2enmod rewrite
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy existing app
+# Copy Laravel files
 COPY . /var/www/html
 
 # Install Composer
