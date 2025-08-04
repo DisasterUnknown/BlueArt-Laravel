@@ -44,7 +44,7 @@
     </div>
 
     {{-- JS Scripts --}}
-    <script defer src="{{ asset('js/layout.js') }}"></script>
+    <script defer src="{{ secure_asset('js/layout.js') }}"></script>
 
     @hasSection('scriptIndex')
         <script defer src="@yield('scriptIndex')"></script>
