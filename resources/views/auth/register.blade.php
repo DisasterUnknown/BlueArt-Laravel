@@ -13,13 +13,13 @@
         <!-- Navigation Bar     -->
         <div class="flex justify-between absolute top-0 left-0 w-full">
             <div class="mt-2">
-                <a href="{{ url('/') }}"
+                <a href="{{ url('/home') }}"
                     class="border bg-white bg-opacity-5 backdrop-blur-lg ml-2 py-0.5 pb-1 px-3 text-white font-semibold rounded">BlueArt</a>
             </div>
             <div class="mt-2">
                 <a href="{{ url('/auth/login') }}"
                     class="border bg-white bg-opacity-5 backdrop-blur-lg mr-2 py-0.5 pb-1 px-3 text-white font-semibold rounded">Login</a>
-                <a href="/WebProject/Pages/aboutUsPage"
+                <a href="{{ url('/aboutUs') }}"
                     class="border bg-white bg-opacity-5 backdrop-blur-lg mr-2 py-0.5 pb-1 px-3 text-white font-semibold rounded">About
                     Us</a>
             </div>

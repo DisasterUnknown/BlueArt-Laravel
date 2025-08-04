@@ -72,7 +72,7 @@
             today and start selling your anime art, collectibles, and more. We offer a platform to showcase your
             work and reach fans who truly appreciate it.
         </p>
-        <a href="/WebProject/Pages/register" class="border px-5 py-4 w-[50%] md:w-[20%] text-center font-bold rounded-xl hover:scale-105 hover:bg-blue-200 hover:text-black hover:shadow-[0_0_15px_2px_rgba(0,255,255,0.8)] transition-transform duration-300">Register Now</a>
+        <a href="{{ url('/auth/register') }}" class="border px-5 py-4 w-[50%] md:w-[20%] text-center font-bold rounded-xl hover:scale-105 hover:bg-blue-200 hover:text-black hover:shadow-[0_0_15px_2px_rgba(0,255,255,0.8)] transition-transform duration-300">Register Now</a>
     </div>
 </div>
 

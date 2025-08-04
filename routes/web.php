@@ -5,7 +5,7 @@ use App\Http\Controllers\LoginController;
 
 // Home route
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 })->name('home');
 
 // Login route
