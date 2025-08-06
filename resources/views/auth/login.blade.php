@@ -1,59 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-guest-layout>
+    <x-authentication-card>
+        <x-slot name="logo">
+            <x-authentication-card-logo />
+        </x-slot>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <title>Login Page</title>
-</head>
+        <x-validation-errors class="mb-4" />
 
-<body class="relative">
-  <div class="bg-cover bg-center h-screen" style="background-image: url('/assets/LoginBackground.gif')">
+        @session('status')
+            <div class="mb-4 font-medium text-sm text-green-600">
+                {{ $value }}
+            </div>
+        @endsession
 
-    <!-- Top Nav Bar -->
-    <div class="flex justify-between absolute top-0 left-0 w-full">
-      <a href="{{ url('/home') }}" class="border bg-white bg-opacity-5 backdrop-blur-lg mt-2 ml-2 py-0.5 pb-1 px-3 text-white font-semibold rounded">BlueArt</a>
-      <a href="{{ url('/aboutUs') }}" class="border bg-white bg-opacity-5 backdrop-blur-lg mt-2 mr-2 py-0.5 pb-1 px-3 text-white font-semibold rounded">About Us</a>
-    </div>
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-    <!-- Login Form -->
-    <div class="flex items-center justify-center h-screen">
-      <form class="bg-white bg-opacity-5 backdrop-blur-lg p-8 w-[85%] sm:w-[350px] shadow-lg rounded">
-        <h1 class="text-3xl text-white text-center font-bold mb-7">Login</h1>
+            <div>
+                <x-label for="email" value="{{ __('Email') }}" />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            </div>
 
-        <!-- Email Input -->
-        <div class="flex justify-center mb-2">
-          <input type="email" placeholder="Email" class="border border-black bg-white text-white bg-opacity-5 px-3 py-0.5 mb-3 w-full rounded-full hover:bg-opacity-10" required>
-        </div>
+            <div class="mt-4">
+                <x-label for="password" value="{{ __('Password') }}" />
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+            </div>
 
-        <!-- Password Input -->
-        <div class="flex justify-center mb-2">
-          <input type="password" placeholder="Password" class="border border-black bg-white text-white bg-opacity-5 px-3 py-0.5 w-full rounded-full hover:bg-opacity-10" required>
-        </div>
+            <div class="block mt-4">
+                <label for="remember_me" class="flex items-center">
+                    <x-checkbox id="remember_me" name="remember" />
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                </label>
+            </div>
 
-        <!-- Login Button -->
-        <button type="submit" class="bg-white px-4 py-1 block mx-auto w-full rounded-full font-bold hover:bg-white hover:bg-opacity-70">Login</button>
+            <div class="flex items-center justify-end mt-4">
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                        {{ __('Forgot your password?') }}
+                    </a>
+                @endif
 
-        <p class="text-white text-sm text-center mt-2 mb-0.5 opacity-80">
-          Don't have an account?
-          <a href="{{ url('/auth/register') }}" class="font-semibold hover:font-bold">Register</a>
-        </p>
-
-        <hr class="my-5">
-
-        <!-- Google Sign-in Button -->
-        <a href="#" class="bg-white px-4 py-1 block text-center mx-auto w-full rounded-full font-bold hover:bg-white hover:bg-opacity-70">
-          Sign in with Google
-        </a>
-      </form>
-    </div>
-
-    <!-- Footer -->
-    <footer class="absolute bottom-0 left-0 w-full bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700 pt-2 pb-2">
-      <p class="text-center text-white">&copy; 2025 BlueArt. All Rights Reserved.</p>
-    </footer>
-  </div>
-</body>
-
-</html>
+                <x-button class="ms-4">
+                    {{ __('Log in') }}
+                </x-button>
+            </div>
+        </form>
+    </x-authentication-card>
+</x-guest-layout>

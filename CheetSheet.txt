@@ -1,0 +1,224 @@
+# 1. Create Laravel project
+composer create-project laravel/laravel BlueArtSSP
+cd BlueArtSSP
+
+# 2. Install MongoDB Laravel driver
+composer require mongodb/laravel-mongodb
+
+# 3. Install Jetstream with Livewire
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+
+# 4. Install Node dependencies and build assets
+npm install
+npm run dev
+
+# 5. Run migrations (optional, may fail due to MongoDB)
+php artisan migrate
+
+# 6. Start Laravel server
+php artisan serve
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+.env
+DB_CONNECTION=mongodb
+DB_URI="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority&appName=<appName>"
+DB_DATABASE=<database>
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+config/database.php
+
+'default' => env('DB_CONNECTION', 'mongodb'),
+'connections' => [
+    'mongodb' => [
+        'driver' => 'mongodb',
+        'dsn' => env('DB_URI'),
+        'database' => env('MONGODB_DATABASE'),
+    ],
+    // other connections...
+],
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+app/Models/User.php
+<?php
+namespace App\Models;
+use MongoDB\Laravel\Eloquent\Model as Eloquent;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+class User extends Eloquent implements AuthenticatableContract
+{
+    use Authenticatable;
+    protected $connection = 'mongodb';
+    protected $collection = 'users';
+    protected $fillable = ['name', 'email', 'password'];
+    protected $hidden = ['password', 'remember_token'];
+}
+
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+resources/views/layouts/app.blade.php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>@yield('title', 'App')</title>
+    @livewireStyles
+</head>
+<body>
+    {{ $slot }}
+    @livewireScripts
+</body>
+</html>
+
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+routes/web.php
+<?php
+use Illuminate\Support\Facades\Route;
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+
+
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+php artisan make:livewire Counter
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+app/Http/Livewire/Counter.php
+<?php
+namespace App\Http\Livewire;
+use Livewire\Component;
+class Counter extends Component
+{
+    public $count = 0;
+    public function increment()
+    {
+        $this->count++;
+    }
+    public function render()
+    {
+        return view('livewire.counter');
+    }
+}
+
+
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+resources/views/livewire/counter.blade.php
+<div>
+    <h1>Count: {{ $count }}</h1>
+    <button wire:click="increment">+</button>
+</div>
+
+
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+use the controller!!
+
+<livewire:counter />
+
+
+
+// =================================================================
+// =================================================================
+// =================================================================
+Start the server
+php artisan serve
+
+
+
+
+# Create a new model (with MongoDB, no need for migration unless used for structure)
+php artisan make:model Product
+
+# Create a model with a corresponding migration (you can skip migration if using MongoDB)
+php artisan make:model Item -m
+
+# Create a new controller (basic)
+php artisan make:controller ProductController
+
+# Create a resource controller (CRUD-style)
+php artisan make:controller ProductController --resource
+
+# Create a new Livewire component (generates both class and Blade view)
+php artisan make:livewire ProductList
+
+# Create a Blade view manually (no artisan command, but here's the path to create):
+# Manually create file: resources/views/pages/product-list.blade.php
+
+# Create a new middleware (e.g., auth check or custom filter)
+php artisan make:middleware CheckRole
+
+# Create a request validation class (for form inputs)
+php artisan make:request StoreProductRequest
+
+# Create a custom command (for console tasks)
+php artisan make:command CleanupDatabase
+
+# Create a factory (useful for test data)
+php artisan make:factory ProductFactory --model=Product
+
+# Create a seeder
+php artisan make:seeder ProductSeeder
+
+# Run all seeders
+php artisan db:seed
+
+# Create a policy (for model-based authorization)
+php artisan make:policy ProductPolicy --model=Product
+
+
+
+
+Laravel + MongoDB
+# Create model and controller
+php artisan make:model Post
+php artisan make:controller PostController
+
+# Create Livewire component if using Livewire
+php artisan make:livewire <Page NAme>
+
+# Then create your view manually in:
+# resources/views/pages/post-list.blade.php

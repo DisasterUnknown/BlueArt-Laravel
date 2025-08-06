@@ -1,57 +1,45 @@
-@php
-    use Illuminate\Support\Str;
-    $role = session('RoleID') ?? '';
-@endphp
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'Page')</title>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Tailwind (Development) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <!-- Tailwind (Production - Uncomment after build) -->
-    <!-- <link href="{{ asset('css/output.css') }}" rel="stylesheet"> -->
-</head>
-<body class="min-h-screen bg-gradient-to-b from-[#01002e] to-black text-white">
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Sidebar --}}
-    @include('includes.sidebar')
+        <!-- Styles -->
+        @livewireStyles
+    </head>
+    <body class="font-sans antialiased">
+        <x-banner />
 
-    {{-- Mobile Menu --}}
-    @include('includes.mobilemenu')
+        <div class="min-h-screen bg-gray-100">
+            @livewire('navigation-menu')
 
-    <div id="mainBody" class="md:ml-[75px] mt-16 md:mt-0 min-h-[calc(100vh)]">
-        {{-- Top Navigation Bar --}}
-        @include('includes.topNavBar')
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
 
-        {{-- Page Content --}}
-        <div class="md:pt-14 px-4">
-            @yield('content')
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
         </div>
 
-        {{-- Footer --}}
-        @include('includes.footer')
-    </div>
+        @stack('modals')
 
-    {{-- JS Scripts --}}
-    <script defer src="{{ secure_asset('js/layout.js') }}"></script>
-
-    @hasSection('scriptIndex')
-        <script defer src="@yield('scriptIndex')"></script>
-    @endif
-
-    @hasSection('scriptPage')
-        <script defer src="@yield('scriptPage')"></script>
-    @endif
-</body>
+        @livewireScripts
+    </body>
 </html>
