@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,3 +29,9 @@ Route::resource('sellers', SellerController::class);
 Route::resource('products', ProductController::class);
 Route::resource('sales', SaleController::class);
 Route::resource('images', ImageController::class);
+
+Route::get('/', function () {
+    return Auth::check()
+        ? redirect()->route('home')   // if logged in
+        : redirect()->route('login'); // if logged out
+});
