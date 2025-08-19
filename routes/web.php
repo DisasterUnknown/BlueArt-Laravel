@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,3 +21,10 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::resource('admins', AdminController::class);
+Route::resource('customers', CustomerController::class);
+Route::resource('sellers', SellerController::class);
+Route::resource('products', ProductController::class);
+Route::resource('sales', SaleController::class);
+Route::resource('images', ImageController::class);
