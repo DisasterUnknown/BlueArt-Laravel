@@ -25,13 +25,13 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'ProductID' => 'nullable|string|max:10',
-            'CustomerID' => 'nullable|string|max:10',
-            'SalesDateTime' => 'nullable|date',
-            'Amount' => 'nullable|numeric',
-            'PhoneNumber' => 'nullable|string|max:15',
-            'Address' => 'nullable|string',
-            'ShippingMethod' => 'nullable|string|max:50'
+            'productID' => 'nullable|string|max:10',
+            'customerID' => 'nullable|string|max:10',
+            'salesDateTime' => 'nullable|date',
+            'amount' => 'nullable|numeric',
+            'phoneNumber' => 'nullable|string|max:15',
+            'address' => 'nullable|string',
+            'shippingMethod' => 'nullable|string|max:50'
         ]);
 
         Sale::create($validated);
@@ -56,13 +56,13 @@ class SaleController extends Controller
     {
         $sale = Sale::findOrFail($id);
         $validated = $request->validate([
-            'ProductID' => 'nullable|string|max:10',
-            'CustomerID' => 'nullable|string|max:10',
-            'SalesDateTime' => 'nullable|date',
-            'Amount' => 'nullable|numeric',
-            'PhoneNumber' => 'nullable|string|max:15',
-            'Address' => 'nullable|string',
-            'ShippingMethod' => 'nullable|string|max:50'
+            'productID' => 'nullable|string|max:10',
+            'customerID' => 'nullable|string|max:10',
+            'salesDateTime' => 'nullable|date',
+            'amount' => 'nullable|numeric',
+            'phoneNumber' => 'nullable|string|max:15',
+            'address' => 'nullable|string',
+            'shippingMethod' => 'nullable|string|max:50'
         ]);
         $sale->update($validated);
         return redirect()->route('sales.index')->with('success','Sale updated');

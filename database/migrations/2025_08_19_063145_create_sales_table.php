@@ -13,14 +13,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->string('SalesID', 10)->primary();
-            $table->string('ProductID', 10);
-            $table->string('CustomerID', 10);
-            $table->dateTime('SalesDateTime')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->decimal('Amount', 3, 0);
-            $table->string('PhoneNumber', 15);
-            $table->text('Address');
-            $table->string('ShippingMethod', 50);
+            $table->string('salesID', 10)->primary();
+            $table->string('productID', 10);
+            $table->string('customerID', 10);
+            $table->dateTime('salesDateTime')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->decimal('amount', 3, 0);
+            $table->string('phoneNumber', 15);
+            $table->text('address');
+            $table->string('shippingMethod', 50);
         });
     }
 

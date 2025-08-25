@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Sale extends Model
 {
     protected $table = 'sales';
-    protected $primaryKey = 'SalesID';
+    protected $primaryKey = 'salesID';
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['ProductID','CustomerID','SalesDateTime','Amount','PhoneNumber','Address','ShippingMethod'];
+    protected $fillable = ['productID','customerID','salesDateTime','amount','phoneNumber','address','shippingMethod'];
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'ProductID', 'ProductID');
+        return $this->belongsTo(Product::class, 'productID', 'productID');
     }
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'CustomerID', 'CustomerID');
+        return $this->belongsTo(Customer::class, 'customerID', 'customerID');
     }
 }

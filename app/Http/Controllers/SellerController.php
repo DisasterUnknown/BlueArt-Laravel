@@ -23,9 +23,9 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'UserID' => 'nullable|string|max:10',
-            'Address' => 'nullable|string|max:255',
-            'Contact' => 'nullable|string|max:20'
+            'userID' => 'nullable|string|max:10',
+            'address' => 'nullable|string|max:255',
+            'contact' => 'nullable|string|max:20'
         ]);
 
         Seller::create($validated);
@@ -49,9 +49,9 @@ class SellerController extends Controller
     {
         $seller = Seller::findOrFail($id);
         $validated = $request->validate([
-            'UserID' => 'nullable|string|max:10',
-            'Address' => 'nullable|string|max:255',
-            'Contact' => 'nullable|string|max:20'
+            'userID' => 'nullable|string|max:10',
+            'address' => 'nullable|string|max:255',
+            'contact' => 'nullable|string|max:20'
         ]);
         $seller->update($validated);
         return redirect()->route('sellers.index')->with('success','Seller updated');

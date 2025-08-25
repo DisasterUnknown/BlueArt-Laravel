@@ -11,10 +11,10 @@ class Image extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['ProductID','Content','Level'];
+    protected $fillable = ['productID','content','level'];
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'ProductID', 'ProductID');
+        return $this->belongsTo(Product::class, 'productID', 'productID');
     }
 }

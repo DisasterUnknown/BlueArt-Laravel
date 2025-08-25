@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     protected $table = 'admin';           // exact table name
-    protected $primaryKey = 'AdminID';    // custom primary key
+    protected $primaryKey = 'adminID';    // custom primary key
     public $incrementing = false;         // IDs are varchar
     public $timestamps = false;           // your table has no timestamps
 
     protected $fillable = [
-        'UserID', 'NIC'
+        'userID', 'NIC'
     ];
 
     // Relationships

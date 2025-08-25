@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->string('ImageID', 10)->primary();
-            $table->string('ProductID', 10);
-            $table->longText('Content');
-            $table->enum('Level', ['main', 'sub'])->default('sub');
+            $table->string('imageID', 10)->primary();
+            $table->string('productID', 10);
+            $table->longText('content');
+            $table->enum('level', ['main', 'sub'])->default('sub');
         });
     }
 

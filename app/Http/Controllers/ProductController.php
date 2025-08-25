@@ -23,13 +23,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'SellerID' => 'nullable|string|max:10',
-            'ProductName' => 'nullable|string|max:100',
-            'Price' => 'nullable|numeric',
-            'Discount' => 'nullable|numeric',
-            'Description' => 'nullable|string',
-            'Category' => 'required|in:art,collectibles',
-            'Status' => 'required|in:active,banned,userkick'
+            'sellerID' => 'nullable|string|max:10',
+            'productName' => 'nullable|string|max:100',
+            'price' => 'nullable|numeric',
+            'discount' => 'nullable|numeric',
+            'description' => 'nullable|string',
+            'category' => 'required|in:art,collectibles',
+            'status' => 'required|in:active,banned,userkick'
         ]);
 
         Product::create($validated);
@@ -53,13 +53,13 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $validated = $request->validate([
-            'SellerID' => 'nullable|string|max:10',
-            'ProductName' => 'nullable|string|max:100',
-            'Price' => 'nullable|numeric',
-            'Discount' => 'nullable|numeric',
-            'Description' => 'nullable|string',
-            'Category' => 'required|in:art,collectibles',
-            'Status' => 'required|in:active,banned,userkick'
+            'sellerID' => 'string|max:10',
+            'productName' => 'string|max:100',
+            'price' => 'numeric',
+            'discount' => 'nullable|numeric',
+            'description' => 'nullable|string',
+            'category' => 'required|in:art,collectibles',
+            'status' => 'required|in:active,banned,userkick'
         ]);
         $product->update($validated);
         return redirect()->route('products.index')->with('success','Product updated');

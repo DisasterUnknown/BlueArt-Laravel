@@ -45,8 +45,12 @@
                     </div>
                 </div>
 
-                @if ($errors->get('email'))
-                <p class="text-center">Sorry Invalid Credentials</p>
+                @if ($errors->any())
+                <div class="bg-red-100/20 border border-red-400/20 text-red-700 mt-5 mb-5 px-4 py-3 rounded">
+                    @foreach ($errors->all() as $error)
+                    <p class="text-white text-center mb-1">{{ $error }}</p>
+                    @endforeach
+                </div>
                 @endif
 
                 <button type="submit"

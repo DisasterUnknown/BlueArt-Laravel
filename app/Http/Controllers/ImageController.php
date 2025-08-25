@@ -23,9 +23,9 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'ProductID' => 'nullable|string|max:10',
-            'Content' => 'nullable|string',
-            'Level' => 'required|in:main,sub'
+            'productID' => 'nullable|string|max:10',
+            'content' => 'nullable|string',
+            'level' => 'required|in:main,sub'
         ]);
 
         Image::create($validated);
@@ -49,9 +49,9 @@ class ImageController extends Controller
     {
         $image = Image::findOrFail($id);
         $validated = $request->validate([
-            'ProductID' => 'nullable|string|max:10',
-            'Content' => 'nullable|string',
-            'Level' => 'required|in:main,sub'
+            'productID' => 'nullable|string|max:10',
+            'content' => 'nullable|string',
+            'level' => 'required|in:main,sub'
         ]);
         $image->update($validated);
         return redirect()->route('images.index')->with('success','Image updated');
