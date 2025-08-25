@@ -68,7 +68,7 @@ $userId = $user->id ?? '';
         <!-- Everyone logged in: Profile -->
         @if ($user)
         <li>
-            <a href="{{ url('/profile') }}"
+            <a href="{{ url('/user/profile') }}"
                 class="flex items-center text-gray-300 font-sans rounded-full hover:bg-black transition-colors duration-500">
                 <span class="material-symbols-outlined p-2 text-xl rounded-full bg-black">person</span>
                 <span class="menu-text hidden ml-4">Profile</span>
