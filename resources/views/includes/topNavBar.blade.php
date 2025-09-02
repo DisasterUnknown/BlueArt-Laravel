@@ -11,11 +11,11 @@ $userId = $user->id ?? '';
         <button id="hamburger" class="z-60 md:hidden bg-white/10 p-2 pb-0 rounded">
             <span class="material-symbols-outlined text-white">menu</span>
         </button>
-        <a href="{{ url('/home') }}" class="text-xl py-1 px-3 text-white custom-font font-bold">BlueArt</a>
+        <a href="{{ url('pages/common/home') }}" class="text-xl py-1 px-3 text-white custom-font font-bold">BlueArt</a>
     </div>
 
     <!-- Customer and Guest view cart -->
-    @if ($role != 'seller' && $role != 'admin')
+    @if ($role != 'seller' && $role != 'admin' && $role != '')
         <a href="{{ url('/cart') }}"
             class="border bg-white bg-opacity-5 backdrop-blur-lg py-1 px-3 text-white font-semibold rounded hover:bg-opacity-10">Cart</a>
     @endif

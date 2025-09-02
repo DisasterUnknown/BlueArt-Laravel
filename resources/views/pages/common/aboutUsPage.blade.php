@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="space-y-4" id="homePage">
+    <div class="space-y-4" id="aboutUs">
         <div class="space-y-4 min-h-[calc(100vh-92px)]" id="viewUsersPage">
             <!-- Topic Section -->
             <p class="text-3xl font-bold text-center mt-20 md:mt-10 mb-10">About BlueArt</p>

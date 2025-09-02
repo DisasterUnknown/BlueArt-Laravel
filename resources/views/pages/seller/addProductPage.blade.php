@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="space-y-4" id="homePage">
+    <div class="space-y-4" id="addNewProduct">
         <!-- Page Maintainence Section -->
         <div class="hidden">
             <input type="file" accept="image/*" id="mainImgIN">

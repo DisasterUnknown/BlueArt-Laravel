@@ -10,10 +10,17 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Controllers\PageControllers\SellerShopController;
-use App\Http\Controllers\PageControllers\AddProductController;
-use App\Http\Controllers\PageControllers\AboutUsController;
-use App\Http\Controllers\PageControllers\Page404Controller;
+use App\Http\Controllers\PageControllers\Seller\SellerShopController;
+use App\Http\Controllers\PageControllers\Seller\AddProductController;
+use App\Http\Controllers\PageControllers\Common\AboutUsController;
+use App\Http\Controllers\PageControllers\Common\CategoriesController;
+use App\Http\Controllers\PageControllers\Common\ViewProductController;
+use App\Http\Controllers\PageControllers\Costomer\CartController;
+use App\Http\Controllers\PageControllers\Costomer\CheckOutController;
+use App\Http\Controllers\PageControllers\Admin\ViewBannedController;
+use App\Http\Controllers\PageControllers\Admin\ViewKickController;
+use App\Http\Controllers\PageControllers\Admin\ViewUsersController;
+use App\Http\Controllers\PageControllers\Common\Page404Controller;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,8 +31,8 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/home', function () {
-        return view('pages.home');
+    Route::get('/pages/common/home', function () {
+        return view('pages.common.home');
     })->name('home');
 });
 
@@ -48,5 +55,19 @@ Route::get('/addProduct', [AddProductController::class, 'index'])
     ->name('addProduct');
 Route::get('/aboutUs', [AboutUsController::class, 'index'])
     ->name('aboutUs');
+Route::get('/cart', [CartController::class, 'index'])
+    ->name('cart');
+Route::get('/viewBannedProducts', [ViewBannedController::class, 'index'])
+    ->name('viewBannedProducts');
+Route::get('/viewKickUsers', [ViewKickController::class, 'index'])
+    ->name('viewKickUsers');
+Route::get('/viewUsers', [ViewUsersController::class, 'index'])
+    ->name('viewUsers');
+Route::get('/categoriesPage', [CategoriesController::class, 'index'])
+    ->name('categoriesPage');
+Route::get('/checkOutPage', [CheckOutController::class, 'index'])
+    ->name('checkOutPage');
+Route::get('/viewProductDetails', [ViewProductController::class, 'index'])
+    ->name('viewProductDetails');
 
 Route::fallback([Page404Controller::class, 'index']);

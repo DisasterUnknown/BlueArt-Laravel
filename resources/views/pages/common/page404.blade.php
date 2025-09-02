@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="space-y-4" id="homePage">
+    <div class="space-y-4" id="page404">
         <div id="noProductCartId" class="flex items-center justify-center min-h-[calc(100vh-92px)]">
             <p class="text-6xl text-center font-bold">404 <br> Error: Page Not Found</p>
         </div>

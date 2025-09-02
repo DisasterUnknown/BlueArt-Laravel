@@ -23,7 +23,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->enum('role', ['customer','seller'])->default('customer');
+            $table->enum('role', ['customer','seller', 'admin'])->default('customer');
             $table->timestamps();
         });
 

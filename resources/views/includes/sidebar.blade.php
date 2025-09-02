@@ -9,14 +9,16 @@ $userId = $user->id ?? '';
 <div id="menu"
     class="fixed top-0 left-0 h-full w-[75px] z-20 overflow-y-auto no-scrollbar bg-blue-900/40 backdrop-blur-md shadow-md transition-all duration-300 p-5 hidden md:block">
     <ul class="space-y-5">
-        <!-- Always shown -->
+        <!-- Always shown if Logedin-->
+        @if ($role != '')
         <li>
-            <a href="{{ url('/home') }}"
+            <a href="{{ url('pages/common/home') }}"
                 class="flex items-center text-gray-300 font-sans rounded-full hover:bg-black transition-colors duration-500">
                 <span class="material-symbols-outlined p-2 text-xl rounded-full bg-black">home</span>
                 <span class="menu-text hidden ml-4">Home</span>
             </a>
         </li>
+        @endif
 
         <!-- Seller Only: Add Product -->
         @if ($role === 'seller')
@@ -92,7 +94,11 @@ $userId = $user->id ?? '';
                 <button type="submit"
                     class="flex items-center text-gray-300 font-sans rounded-full hover:bg-black transition-colors duration-500 w-full text-left">
                     <span class="material-symbols-outlined p-2 text-xl rounded-full bg-black">logout</span>
+                    @if ($role === '')
+                    <span class="menu-text hidden ml-4">Login</span>
+                    @else
                     <span class="menu-text hidden ml-4">Logout</span>
+                    @endif
                 </button>
             </form>
         </li>
