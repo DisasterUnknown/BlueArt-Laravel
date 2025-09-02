@@ -21,20 +21,24 @@ class ProductController extends Controller
         return view('product.create', compact('sellers'));
     }
 
-    public function store(Request $request)
+    public static function store(Request $request)
     {
-        $validated = $request->validate([
-            'sellerID' => 'nullable|string|max:10',
-            'productName' => 'nullable|string|max:100',
-            'price' => 'nullable|numeric',
-            'discount' => 'nullable|numeric',
-            'description' => 'nullable|string',
-            'category' => 'required|in:art,collectibles',
-            'status' => 'required|in:active,banned,userkick'
-        ]);
+        dump($request->all());
+        // $validated = $request->validate([
+        //     'name' => 'required|string|max:25',
+        //     'price' => 'required|numeric',
+        //     'discount' => 'numeric|max:99.9',
+        //     'category' => 'required|string',
+        //     'description' => 'string|max:1000',
+        //     'mainImageBase64' => 'required|string',
+        //     'image1Base64' => 'nullable|string',
+        //     'image2Base64' => 'nullable|string',
+        //     'image3Base64' => 'nullable|string',
+        //     'image4Base64' => 'nullable|string',
+        // ]);
 
-        Product::create($validated);
-        return redirect()->route('products.index')->with('success','Product added');
+        // Product::create($validated);
+        // return redirect()->route('products.index')->with('success','Product added');
     }
 
     public function show($id)

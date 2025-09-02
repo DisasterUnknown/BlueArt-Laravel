@@ -34,6 +34,29 @@ Route::middleware([
     Route::get('/pages/common/home', function () {
         return view('pages.common.home');
     })->name('home');
+    
+    Route::get('/sellerShop', [SellerShopController::class, 'index'])
+        ->name('sellerShop');
+
+    // Seller Add and Update Products Rout 
+    Route::get('/addProduct', [AddProductController::class, 'index'])
+        ->name('addProduct');
+    Route::post('/add-product', [AddProductController::class, 'store'])->name('addProduct');
+
+    Route::get('/cart', [CartController::class, 'index'])
+        ->name('cart');
+    Route::get('/viewBannedProducts', [ViewBannedController::class, 'index'])
+        ->name('viewBannedProducts');
+    Route::get('/viewKickUsers', [ViewKickController::class, 'index'])
+        ->name('viewKickUsers');
+    Route::get('/viewUsers', [ViewUsersController::class, 'index'])
+        ->name('viewUsers');
+    Route::get('/categoriesPage', [CategoriesController::class, 'index'])
+        ->name('categoriesPage');
+    Route::get('/checkOutPage', [CheckOutController::class, 'index'])
+        ->name('checkOutPage');
+    Route::get('/viewProductDetails', [ViewProductController::class, 'index'])
+        ->name('viewProductDetails');
 });
 
 Route::resource('admins', AdminController::class);
@@ -49,25 +72,8 @@ Route::get('/', function () {
         : redirect()->route('login'); // if logged out
 });
 
-Route::get('/sellerShop', [SellerShopController::class, 'index'])
-    ->name('sellerShop');
-Route::get('/addProduct', [AddProductController::class, 'index'])
-    ->name('addProduct');
+
 Route::get('/aboutUs', [AboutUsController::class, 'index'])
     ->name('aboutUs');
-Route::get('/cart', [CartController::class, 'index'])
-    ->name('cart');
-Route::get('/viewBannedProducts', [ViewBannedController::class, 'index'])
-    ->name('viewBannedProducts');
-Route::get('/viewKickUsers', [ViewKickController::class, 'index'])
-    ->name('viewKickUsers');
-Route::get('/viewUsers', [ViewUsersController::class, 'index'])
-    ->name('viewUsers');
-Route::get('/categoriesPage', [CategoriesController::class, 'index'])
-    ->name('categoriesPage');
-Route::get('/checkOutPage', [CheckOutController::class, 'index'])
-    ->name('checkOutPage');
-Route::get('/viewProductDetails', [ViewProductController::class, 'index'])
-    ->name('viewProductDetails');
 
 Route::fallback([Page404Controller::class, 'index']);
