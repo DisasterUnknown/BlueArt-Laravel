@@ -28,7 +28,7 @@ $userId = $user->id ?? '';
             </a>
         </li>
         <li>
-            <a id="addNewProductNav"
+            <a href="{{ url('/addProduct') }}"
                 class="flex cursor-pointer items-center text-gray-300 font-sans rounded-full hover:bg-black transition-colors duration-500">
                 <span class="material-symbols-outlined p-2 text-xl rounded-full bg-black">add_box</span>
                 <span class="menu-text hidden ml-4">Add Product</span>

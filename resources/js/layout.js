@@ -29,23 +29,3 @@ window.onload = () => {
   }
 }
 
-// ====================================================================================
-// Navigating to seller add product page
-if (document.getElementById('addNewProductNav')) {
-  document.getElementById('addNewProductNav').addEventListener('click', () => {
-    sessionStorage.setItem('SellerProductMode', 'Add');
-    window.location = '/WebProject/Pages/addProduct';
-  });
-
-  document.getElementById('topBarAddProducts').addEventListener('click', () => {
-    sessionStorage.setItem('SellerProductMode', 'Add');
-    window.location = '/WebProject/Pages/addProduct';
-  });
-}
-
-if (document.getElementById('addNewProductNavMobile')) {
-  document.getElementById('addNewProductNavMobile').addEventListener('click', () => {
-    sessionStorage.setItem('SellerProductMode', 'Add');
-    window.location = '/WebProject/Pages/addProduct';
-  });
-}
