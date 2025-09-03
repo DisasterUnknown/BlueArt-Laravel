@@ -11,7 +11,7 @@ class Seller extends Model
     public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['sellerID', 'userID','address','contact'];
+    protected $fillable = ['sellerID', 'user_id','address','contact'];
 
     public function user()
     {

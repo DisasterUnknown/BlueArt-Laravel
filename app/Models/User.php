@@ -13,15 +13,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable;
 
-    // Custom primary key and non-incrementing ID
-    protected $primaryKey = 'userID';
-    public $incrementing = false;
-    public $keyType = 'string';
-    public $timestamps = false;
+    // Enable timestamps (created_at & updated_at)
+    public $timestamps = true;
 
-    // ✅ Mass assignable fields
+    // Mass assignable fields
     protected $fillable = [
-        'userID',
         'name',
         'email',
         'password',
@@ -31,7 +27,7 @@ class User extends Authenticatable
         'OAUTH'
     ];
 
-    // ✅ Hidden fields for serialization
+    // Hidden fields for serialization
     protected $hidden = [
         'password',
         'remember_token',
@@ -44,37 +40,24 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    //  Attribute casts
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-        ];
-    }
+    // Attribute casts
+    protected $casts = [
+        'password' => 'hashed',
+    ];
 
-    public function getAuthIdentifierName()
-    {
-        return 'userID';
-    }
-
-    public function getAuthIdentifier()
-    {
-        return $this->userID;
-    }
-
-    //  Relationships to your other tables
+    // Relationships
     public function admin()
     {
-        return $this->hasOne(Admin::class, 'userID', 'userID');
+        return $this->hasOne(Admin::class, 'user_id', 'id');
     }
 
     public function customer()
     {
-        return $this->hasOne(Customer::class, 'userID', 'userID');
+        return $this->hasOne(Customer::class, 'user_id', 'id');
     }
 
     public function seller()
     {
-        return $this->hasOne(Seller::class, 'userID', 'userID');
+        return $this->hasOne(Seller::class, 'user_id', 'id');
     }
 }

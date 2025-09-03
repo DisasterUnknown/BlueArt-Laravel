@@ -33,21 +33,8 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        // Getting the last user ID
-        $lastID = DB::table('id_counter')
-            ->where('TableName', 'user')
-            ->value('LastID');
-
-        $nextID = str_pad($lastID + 1, 10, '0', STR_PAD_LEFT);
-
-        // Updating the id table
-        DB::table('id_counter')
-            ->where('TableName', 'user')
-            ->update(['LastID' => $lastID + 1]);
-
         // Create the user with custom fields
         $user =  User::create([
-            'userID'   => $nextID,
             'name'     => $input['name'],
             'email'    => $input['email'],
             'password' => Hash::make($input['password']),
@@ -58,20 +45,8 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         if ($input['role'] === 'seller') {
-            $lastID = DB::table('id_counter')
-                ->where('TableName', 'seller')
-                ->value('LastID');
-
-            $nextID = str_pad($lastID + 1, 10, '0', STR_PAD_LEFT);
-
-            // Updating the id table
-            DB::table('id_counter')
-                ->where('TableName', 'seller')
-                ->update(['LastID' => $lastID + 1]);
-
             Seller::create([
-                'sellerID' => $nextID, // generate ID
-                'userID'   => $user->userID,
+                'user_id'   => $user->id,
                 'address'  => $input['address'],
                 'contact'  => $input['contact'],
             ]);

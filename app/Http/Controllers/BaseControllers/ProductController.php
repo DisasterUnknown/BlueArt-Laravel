@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BaseControllers;
 
 use App\Models\Product;
 use App\Models\Seller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,6 +26,7 @@ class ProductController extends Controller
     {
         dump($request->all());
         // $validated = $request->validate([
+        //     'sellerID' => 'required|string|max:10',
         //     'name' => 'required|string|max:25',
         //     'price' => 'required|numeric',
         //     'discount' => 'numeric|max:99.9',
@@ -36,6 +38,18 @@ class ProductController extends Controller
         //     'image3Base64' => 'nullable|string',
         //     'image4Base64' => 'nullable|string',
         // ]);
+
+        // Getting the last product ID
+        $lastID = DB::table('id_counter')
+            ->where('TableName', 'product')
+            ->value('LastID');
+
+        $nextID = str_pad($lastID + 1, 10, '0', STR_PAD_LEFT);
+
+        // Updating the id table
+        DB::table('id_counter')
+            ->where('TableName', 'product')
+            ->update(['LastID' => $lastID + 1]);
 
         // Product::create($validated);
         // return redirect()->route('products.index')->with('success','Product added');

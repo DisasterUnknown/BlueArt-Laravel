@@ -22,10 +22,6 @@ use App\Http\Controllers\PageControllers\Admin\ViewKickController;
 use App\Http\Controllers\PageControllers\Admin\ViewUsersController;
 use App\Http\Controllers\PageControllers\Common\Page404Controller;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
