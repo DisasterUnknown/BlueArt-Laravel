@@ -6,16 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $table = 'customer';
-    protected $primaryKey = 'customerID';
-    public $incrementing = false;
     public $timestamps = false;
 
-    protected $fillable = ['userID'];
+    protected $fillable = ['user_id'];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'userID', 'userID');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     public function sales()

@@ -22,7 +22,7 @@
             <input type="file" accept="image/*" id="imgIN4" x-ref="imgIN4" @change="onFileChange($event, 'img4')">
         </div>
 
-        <form action="{{ route('addProduct') }}" method="POST" enctype="multipart/form-data" class="space-y-4 min-h-[calc(100vh-92px)]" id="addNewProductPage">
+        <form action="{{ route('add-product') }}" method="POST" enctype="multipart/form-data" class="space-y-4 min-h-[calc(100vh-92px)]" id="addNewProductPage">
             @csrf
 
             <!-- Form Submit Image Data -->
@@ -65,10 +65,10 @@
                     </div>
                     <div class="flex justify-between mx-2 md:mx-[10%] my-3">
                         <label class="text-xl font-semibold">Role:</label>
-                        <select id="categorySelect" name="category" value="{{ old('category') }}"
+                        <select id="categorySelect" name="category"
                             class="border border-white border-r-10 bg-white text-white bg-opacity-5 px-1.5 py-0.5 w-[50%] md:w-[45%] lg:w-[40%] rounded-full hover:bg-opacity-10">
-                            <option value="art" class="bg-white text-black">Art</option>
-                            <option value="collectibles" class="bg-white text-black">Collectibles</option>
+                            <option value="art" {{ old('category') == 'art' ? 'selected' : '' }} class="bg-white text-black">Art</option>
+                            <option value="collectibles" {{ old('category') == 'collectibles' ? 'selected' : '' }} class="bg-white text-black">Collectibles</option>
                         </select>
                     </div>
 
@@ -80,7 +80,7 @@
                 <p class="text-2xl font-bold text-center md:text-left mt-8 mb-10">Description</p>
                 <div class="flex justify-center">
                     <textarea name="description" placeholder="Enter product description..." maxlength="1000"
-                        id="descriptionIN" class="border bg-white/5 w-[90%] aspect-[2/1] md:aspect-[5/1] px-4 py-4 rounded-xl"></textarea>
+                        id="descriptionIN" class="border bg-white/5 w-[90%] aspect-[2/1] md:aspect-[5/1] px-4 py-4 rounded-xl">{{ old('description') }}</textarea>
                 </div>
             </div>
 

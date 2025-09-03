@@ -13,8 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sales', function (Blueprint $table) {
-            $table->string('salesID', 10)->primary();
-            $table->string('productID', 10);
+            $table->id();
+            $table->unsignedBigInteger('product_id');
             $table->string('customerID', 10);
             $table->dateTime('salesDateTime')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('amount', 3, 0);

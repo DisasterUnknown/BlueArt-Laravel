@@ -26,7 +26,7 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'productID' => 'nullable|string|max:10',
+            'product_id' => 'nullable|string|max:10',
             'customerID' => 'nullable|string|max:10',
             'salesDateTime' => 'nullable|date',
             'amount' => 'nullable|numeric',
@@ -57,7 +57,7 @@ class SaleController extends Controller
     {
         $sale = Sale::findOrFail($id);
         $validated = $request->validate([
-            'productID' => 'nullable|string|max:10',
+            'product_id' => 'nullable|string|max:10',
             'customerID' => 'nullable|string|max:10',
             'salesDateTime' => 'nullable|date',
             'amount' => 'nullable|numeric',

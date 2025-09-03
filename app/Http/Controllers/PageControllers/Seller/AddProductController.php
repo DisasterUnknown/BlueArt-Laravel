@@ -17,10 +17,10 @@ class AddProductController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        $userId = $user->userID;
+        $userId = $user->id;
 
         // Merge user_id into the request
-        $request->merge(['userID' => $userId]);
+        $request->merge(['user_id' => $userId]);
 
         // Checling for validity
         if ($request->mainImageBase64 == null) {
@@ -36,7 +36,8 @@ class AddProductController extends Controller
         } else if ($request->discount == null) {
             return redirect()->back()->with('error', 'Product discount is required')->withInput();
         } else {
-            ProductController::store($request);
+            $controller = new ProductController();
+            return $controller->store($request);
         }
     }
 }

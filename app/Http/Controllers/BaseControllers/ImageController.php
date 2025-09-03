@@ -24,7 +24,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'productID' => 'nullable|string|max:10',
+            'product_id' => 'nullable|string|max:10',
             'content' => 'nullable|string',
             'level' => 'required|in:main,sub'
         ]);
@@ -50,7 +50,7 @@ class ImageController extends Controller
     {
         $image = Image::findOrFail($id);
         $validated = $request->validate([
-            'productID' => 'nullable|string|max:10',
+            'product_id' => 'nullable|string|max:10',
             'content' => 'nullable|string',
             'level' => 'required|in:main,sub'
         ]);

@@ -24,7 +24,7 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'userID' => 'nullable|string|max:10',
+            'user_id' => 'nullable|string|max:10',
             'address' => 'nullable|string|max:255',
             'contact' => 'nullable|string|max:20'
         ]);
@@ -50,7 +50,7 @@ class SellerController extends Controller
     {
         $seller = Seller::findOrFail($id);
         $validated = $request->validate([
-            'userID' => 'nullable|string|max:10',
+            'user_id' => 'nullable|string|max:10',
             'address' => 'nullable|string|max:255',
             'contact' => 'nullable|string|max:20'
         ]);

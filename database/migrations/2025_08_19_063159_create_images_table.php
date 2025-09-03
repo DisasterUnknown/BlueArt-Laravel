@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->string('imageID', 10)->primary();
-            $table->string('productID', 10);
+            $table->id();
+            $table->unsignedBigInteger('product_id');
             $table->longText('content');
             $table->enum('level', ['main', 'sub'])->default('sub');
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

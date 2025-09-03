@@ -6,16 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
 {
-    protected $table = 'sellers';
-    protected $primaryKey = 'sellerID';
-    public $incrementing = false;
     public $timestamps = false;
 
     protected $fillable = ['sellerID', 'user_id','address','contact'];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'userID', 'userID');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
     public function products()

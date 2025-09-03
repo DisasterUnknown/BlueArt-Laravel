@@ -24,7 +24,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'userID' => 'nullable|string|max:10'
+            'user_id' => 'nullable|string|max:10'
         ]);
 
         Customer::create($validated);
@@ -48,7 +48,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
         $validated = $request->validate([
-            'userID' => 'nullable|string|max:10'
+            'user_id' => 'nullable|string|max:10'
         ]);
         $customer->update($validated);
         return redirect()->route('customers.index')->with('success','Customer updated');

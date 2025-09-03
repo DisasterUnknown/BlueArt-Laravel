@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->string('productID', 10)->primary();
-            $table->string('sellerID', 10);
-            $table->string('productName', 100);
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('name', 100);
             $table->decimal('price',  10, 2);
             $table->decimal('discount', 5, 2);
             $table->text('description');
             $table->enum('category', ['art', 'collectibles'])->default('art');
             $table->enum('status', ['active', 'banned', 'userkick'])->default('active');
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

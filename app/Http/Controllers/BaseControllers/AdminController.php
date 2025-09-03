@@ -24,7 +24,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'userID' => 'nullable|string|max:10',
+            'user_id' => 'nullable|string|max:10',
             'NIC' => 'nullable|string|max:20'
         ]);
 
@@ -49,7 +49,7 @@ class AdminController extends Controller
     {
         $admin = Admin::findOrFail($id);
         $validated = $request->validate([
-            'userID' => 'nullable|string|max:10',
+            'user_id' => 'nullable|string|max:10',
             'NIC' => 'nullable|string|max:20'
         ]);
         $admin->update($validated);

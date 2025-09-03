@@ -32,12 +32,12 @@ Route::middleware([
     })->name('home');
     
     Route::get('/sellerShop', [SellerShopController::class, 'index'])
-        ->name('sellerShop');
+        ->name('pages.seller.sellerShop');
 
     // Seller Add and Update Products Rout 
     Route::get('/addProduct', [AddProductController::class, 'index'])
         ->name('addProduct');
-    Route::post('/add-product', [AddProductController::class, 'store'])->name('addProduct');
+    Route::post('/add-product', [AddProductController::class, 'store'])->name('add-product');
 
     Route::get('/cart', [CartController::class, 'index'])
         ->name('cart');
@@ -54,13 +54,6 @@ Route::middleware([
     Route::get('/viewProductDetails', [ViewProductController::class, 'index'])
         ->name('viewProductDetails');
 });
-
-Route::resource('admins', AdminController::class);
-Route::resource('customers', CustomerController::class);
-Route::resource('sellers', SellerController::class);
-Route::resource('products', ProductController::class);
-Route::resource('sales', SaleController::class);
-Route::resource('images', ImageController::class);
 
 Route::get('/', function () {
     return Auth::check()
