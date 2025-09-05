@@ -59,8 +59,8 @@
                     <div class="text-center">
                         @if(auth()->check() && auth()->id() === $product->user_id)
                         <!-- Seller sees Manage Product  -->
-                        <a>
-                            <button type="submit"
+                        <a href="{{ route('addProduct', $product->id) }}">
+                            <button type="button"
                                 id="productActionBtn"
                                 class="border hover:bg-white/20 py-2 px-8 mt-5 mb-3 mx-2 md:mx-[10%] md:mt-5 rounded-full transition-colors duration-500">
                                 Manage Product

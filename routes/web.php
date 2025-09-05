@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\PageControllers\Seller\SellerShopController;
-use App\Http\Controllers\PageControllers\Seller\AddProductController;
+use App\Http\Controllers\PageControllers\Seller\AddAndUpdateProductController;
 use App\Http\Controllers\PageControllers\Common\AboutUsController;
 use App\Http\Controllers\PageControllers\Common\CategoriesController;
 use App\Http\Controllers\PageControllers\Common\ViewProductController;
@@ -35,9 +35,9 @@ Route::middleware([
         ->name('pages.seller.sellerShop');
 
     // Seller Add and Update Products Rout 
-    Route::get('/addProduct', [AddProductController::class, 'index'])
+    Route::get('/addProduct/{product?}', [AddAndUpdateProductController::class, 'index'])
         ->name('addProduct');
-    Route::post('/add-product', [AddProductController::class, 'store'])->name('add-product');
+    Route::post('/add&UpdateProduct', [AddAndUpdateProductController::class, 'store'])->name('add&UpdateProduct');
 
     Route::get('/cart', [CartController::class, 'index'])
         ->name('cart');

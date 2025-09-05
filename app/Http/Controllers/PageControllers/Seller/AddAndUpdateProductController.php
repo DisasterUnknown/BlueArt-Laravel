@@ -4,14 +4,31 @@ namespace App\Http\Controllers\PageControllers\Seller;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BaseControllers\ProductController;
 
-class AddProductController extends Controller
+class AddAndUpdateProductController extends Controller
 {
-    public function index()
+    public function index(Product $product = null)
     {
-        return view("pages/seller/addProductPage");
+        if ($product) {
+            // Pass product data for Alpine.js to prefill
+            $images = $product->images->map(function ($img, $index) {
+                return [
+                    'Level' => $index === 0 ? 'main' : 'sub',
+                    'Content' => $img->content,
+                ];
+            });
+
+            return view('pages.seller.addProductPage', [
+                'product' => $product,
+                'images' => $images,
+                'mode' => 'edit'
+            ]);
+        }
+
+        return view('pages.seller.addProductPage', ['mode' => 'add']);
     }
 
     public function store(Request $request)
@@ -37,7 +54,14 @@ class AddProductController extends Controller
             return redirect()->back()->with('error', 'Product discount is required')->withInput();
         } else {
             $controller = new ProductController();
-            return $controller->store($request);
+            switch ($request->mode) {
+                case 'edit':
+                    return $controller->update($request);
+                case 'add':
+                    return $controller->store($request);
+                default:
+                    break;
+            }
         }
     }
 }

@@ -6,11 +6,13 @@
     </x-slot>
 
     <div class="space-y-4" id="addNewProduct" x-data="productAlpine({
-            oldMain: '{{ old('mainImageBase64') }}',
-            oldImg1: '{{ old('image1Base64') }}',
-            oldImg2: '{{ old('image2Base64') }}',
-            oldImg3: '{{ old('image3Base64') }}',
-            oldImg4: '{{ old('image4Base64') }}'
+            oldMain: '{{ old('mainImageBase64', $product->main_image ?? '') }}',
+            oldImg1: '{{ old('image1Base64', $product->images[0] ?? '') }}',
+            oldImg2: '{{ old('image2Base64', $product->images[1] ?? '') }}',
+            oldImg3: '{{ old('image3Base64', $product->images[2] ?? '') }}',
+            oldImg4: '{{ old('image4Base64', $product->images[3] ?? '') }}',
+            mode: '{{ $mode ?? 'Add' }}',
+            product: '{{ $product ?? '' }}'
         })" x-init="init()">
 
         <!-- Page Maintainence Section -->
@@ -22,8 +24,17 @@
             <input type="file" accept="image/*" id="imgIN4" x-ref="imgIN4" @change="onFileChange($event, 'img4')">
         </div>
 
-        <form action="{{ route('add-product') }}" method="POST" enctype="multipart/form-data" class="space-y-4 min-h-[calc(100vh-92px)]" id="addNewProductPage">
+        <form action="{{ route('add&UpdateProduct') }}" method="POST" enctype="multipart/form-data" class="space-y-4 min-h-[calc(100vh-92px)]" id="addNewProductPage">
             @csrf
+
+            <!-- edit mode text -->
+            <input type="hidden" name="mode" value="{{ $mode ?? 'add' }}">
+            <input type="hidden" name="product_id" value="{{ $product->id ?? '' }}">
+            <input type="hidden" name="product_imgId" value="{{ $product->images[0]->id ?? '' }}">
+            <input type="hidden" name="product_imgId1" value="{{ $product->images[1]->id ?? '' }}">
+            <input type="hidden" name="product_imgId2" value="{{ $product->images[2]->id ?? '' }}">
+            <input type="hidden" name="product_imgId3" value="{{ $product->images[3]->id ?? '' }}">
+            <input type="hidden" name="product_imgId4" value="{{ $product->images[4]->id ?? '' }}">
 
             <!-- Form Submit Image Data -->
             <div class="hidden">
@@ -34,7 +45,11 @@
                 <input name="image4Base64" id="image4Base64" x-ref="image4Base64" value="{{ old('image4Base64') }}">
             </div>
 
-            <p id="AddUpdatePageTitle" class="text-2xl font-bold text-center mt-15 mb-20">Add Product</p>
+            @if ($mode == 'edit')
+            <p class="text-2xl font-bold text-center mt-15 mb-20">Update Product</p>
+            @else
+            <p class="text-2xl font-bold text-center mt-15 mb-20">Add Product</p>
+            @endif
 
             <!-- Product Card Section -->
             <div class="flex flex-col md:flex-row justify-center">

@@ -9,30 +9,33 @@ export default function productAlpine(old = {}) {
             img4: old.oldImg4 || null,
         },
 
+        mode: old.mode || 'add',
+        product: old.product || null,
+
         init() {
-            // observe backend response
-            const mode = sessionStorage.getItem('SellerProductMode'); // 'Edit' or 'Add'
-            const targetNode = this.$refs.compleateResponce;
-            if (!targetNode) return;
+            // observe backend responseconst 
+            const mode = this.mode; // now reactive
+            const product = this.product;
 
-            const config = { childList: true, subtree: true, characterData: true };
-            const observer = new MutationObserver(() => {
-                let raw = (targetNode.textContent || '').trim();
-                if (!raw || raw === 'null' || raw === 'null1') return;
-                try {
-                    const data = JSON.parse(raw);
-                    if (mode === 'Edit') this.fillEdit(data);
-                    if (mode === 'Add') this.handleAddResponse(data);
-                } catch (e) {
-                    console.error('Invalid JSON in compleateResponce', e);
-                }
-            });
-            observer.observe(targetNode, config);
+            if (mode == "edit") {
+                const data = JSON.parse(product);
+                if (data.images[0].content) this.previews.main = data.images[0].content;
+                else if (data.images[1].content) this.previews.img1 = data.images[1].content;
+                else if (data.images[2].content) this.previews.img2 = data.images[2].content;
+                else if (data.images[3].content) this.previews.img3 = data.images[3].content;
+                else if (data.images[4].content) this.previews.img4 = data.images[4].content;
+                
+                if (data.images[0].content) this.$refs.mainImageBase64.value = data.images[0].content;
+                else if (data.images[1].content) this.$refs.image1Base64.value = data.images[1].content;
+                else if (data.images[2].content) this.$refs.image2Base64.value = data.images[2].content;
+                else if (data.images[3].content) this.$refs.image3Base64.value = data.images[3].content;
+                else if (data.images[4].content) this.$refs.image4Base64.value = data.images[4].content;
 
-            // wire submit button for Edit mode (keeps your global handler)
-            if (mode === 'Edit' && window.SellerEditProductBtnClick) {
-                document.getElementById('addProductBtn')
-                    .addEventListener('click', () => window.SellerEditProductBtnClick());
+                document.getElementById('productNameIN').value = data.name;
+                document.getElementById('priceIN').value = data.price ? Number(data.price).toLocaleString('en-US') : '';
+                document.getElementById('discountIN').value = data.discount;
+                document.getElementById('categorySelect').value = data.category;
+                document.getElementById('descriptionIN').value = data.description;
             }
         },
 
@@ -83,46 +86,6 @@ export default function productAlpine(old = {}) {
             let num = parseFloat(value);
             if (!isNaN(num) && num > 99.9) num = 99.9;
             e.target.value = isNaN(num) ? '' : num.toString();
-        },
-
-        // Edit mode
-        fillEdit(payload) {
-            if (payload?.error == 1) {
-                const el = document.getElementById('errorDisplayMsg');
-                el.innerHTML = payload.msg;
-                el.classList.add('block');
-                el.style.color = '#FF0000';
-                return;
-            }
-            const data = payload?.msg || [];
-            const mainImg = data.find(x => x.Level === 'main');
-            if (mainImg?.Content) {
-                this.previews.main = mainImg.Content;
-                this.$refs.mainImageBase64.value = mainImg.Content;
-            }
-
-            // Populate inputs/labels exactly like your original
-            document.getElementById('AddUpdatePageTitle').innerHTML = 'Edit Product';
-            const p0 = data?.[0] || {};
-            document.getElementById('productNameIN').value = p0.ProductName || '';
-            const priceEl = document.getElementById('priceIN');
-            priceEl.placeholder = p0.Price ? Number(p0.Price).toLocaleString() : '';
-            const discEl = document.getElementById('discountIN');
-            discEl.placeholder = p0.Discount ?? '';
-            const catEl = document.getElementById('categorySelect');
-            if (p0.Category) catEl.value = p0.Category;
-            document.getElementById('descriptionIN').value = p0.Description || '';
-
-            // extra images
-            const img1 = data?.[1]?.Content || "null";
-            const img2 = data?.[2]?.Content || "null";
-            const img3 = data?.[3]?.Content || "null";
-            const img4 = data?.[4]?.Content || "null";
-
-            if (img1 !== "null") { this.previews.img1 = img1; this.$refs.image1Base64.value = img1; }
-            if (img2 !== "null") { this.previews.img2 = img2; this.$refs.image2Base64.value = img2; }
-            if (img3 !== "null") { this.previews.img3 = img3; this.$refs.image3Base64.value = img3; }
-            if (img4 !== "null") { this.previews.img4 = img4; this.$refs.image4Base64.value = img4; }
         },
 
         // mirrors your Add-mode error handling
