@@ -77,4 +77,9 @@ class CartPage extends Component
     {
         return view('livewire.common.cart-page');
     }
+
+    public function viewProduct($id)
+    {
+        return redirect()->route('viewProductDetails', ['id' => $id]);
+    }
 }

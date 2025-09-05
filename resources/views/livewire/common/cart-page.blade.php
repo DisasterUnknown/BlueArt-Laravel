@@ -4,7 +4,7 @@
 
         <div class="flex flex-row flex-wrap justify-evenly mt-8">
             @foreach($cartItems as $item)
-                <div class="relative border mb-3 mt-2 mx-3 h-40 md:h-60 lg:h-80 w-[40%] md:w-[20%] lg:w-[20%] xl:w-[15%] rounded-2xl hover:scale-105 hover:shadow-[0_0_15px_2px_rgba(255,255,255,0.8)] transition-transform duration-300">
+                <div wire:click="viewProduct({{ $item['product']->id }})" class="relative border mb-3 mt-2 mx-3 h-40 md:h-60 lg:h-80 w-[40%] md:w-[20%] lg:w-[20%] xl:w-[15%] rounded-2xl hover:scale-105 hover:shadow-[0_0_15px_2px_rgba(255,255,255,0.8)] transition-transform duration-300">
                     <div class="absolute w-full h-full opacity-40 rounded-xl bg-cover bg-center"
                         style="background-image: url('{{ $item["product"]->images->first()?->content ?? asset('assets/placeholder.png') }}')"></div>
 
@@ -15,7 +15,7 @@
                         </span>
                         <span class="text-sm text-gray-300">Quantity: {{ $item['quantity'] }}</span>
 
-                        <button wire:click="removeItem({{ $item['product']->id }})"
+                        <button wire:click.stop="removeItem({{ $item['product']->id }})"
                                 class="border bg-red-500/30 hover:bg-red-600/60 px-4 py-1 mt-[10%] font-semibold rounded-full">
                             Remove
                         </button>
