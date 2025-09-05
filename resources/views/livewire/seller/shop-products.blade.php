@@ -1,8 +1,9 @@
 <div class="flex flex-row flex-wrap justify-evenly mt-8">
     @foreach($products as $product)
-    <div class="border my-5 md:mx-5 w-[40%] md:w-[20%] lg:w-[20%] xl:w-[15%] 
-                    rounded-2xl hover:scale-105 hover:shadow-[0_0_15px_2px_rgba(255,255,255,0.8)] 
-                    transition-transform duration-300">
+    <div wire:click="viewProduct({{ $product->id }})"
+        class="border my-5 md:mx-5 w-[40%] md:w-[20%] lg:w-[20%] xl:w-[15%] 
+                rounded-2xl hover:scale-105 hover:shadow-[0_0_15px_2px_rgba(255,255,255,0.8)] 
+                transition-transform duration-300">
 
         {{-- Hidden Product ID --}}
         <div class="hidden">{{ $product->id }}</div>
@@ -22,7 +23,7 @@
             </p>
 
             <div class="flex items-center justify-center">
-                <button wire:click="removeProduct({{ $product->id }})"
+                <button wire:click.stop="removeProduct({{ $product->id }})"
                     class="border py-2 px-4 mt-2 mb-1 mx-auto rounded-xl 
                         hover:bg-red-500/60 hover:scale-105 
                         hover:shadow-[0_0_15px_2px_rgba(255,0,255,0.8)] 

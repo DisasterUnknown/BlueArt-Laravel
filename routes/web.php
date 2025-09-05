@@ -51,7 +51,7 @@ Route::middleware([
         ->name('categoriesPage');
     Route::get('/checkOutPage', [CheckOutController::class, 'index'])
         ->name('checkOutPage');
-    Route::get('/viewProductDetails', [ViewProductController::class, 'index'])
+    Route::get('/viewProductDetails{id}', [ViewProductController::class, 'index'])
         ->name('viewProductDetails');
 });
 

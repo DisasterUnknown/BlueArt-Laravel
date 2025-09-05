@@ -30,4 +30,9 @@ class ShopProducts extends Component
         // Refresh products
         $this->products = Product::with('seller', 'images', 'sales')->where('status', '!=',  'deleted')->get();
     }
+
+    public function viewProduct($id)
+    {
+        return redirect()->route('viewProductDetails', ['id' => $id]);
+    }
 }
