@@ -4,35 +4,51 @@ namespace App\Http\Controllers\BaseControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mongo\UserCart;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class UserCartController extends Controller
 {
     // Add a product with quantity
-    public function addToCart($userId, $productId, $quantity = 1)
+    public function addToCart(Request $request)
     {
+        $productId = $request->input('product_id');
+        $quantity  = $request->input('quantity');
+
+        if (!Auth::check()) {
+            return redirect()->back()->with('error', 'You must be logged in to add products to the cart.')->withInput();
+        }
+
+        $userId = Auth::id();
+
         $cart = UserCart::firstOrCreate(
             ['user_id' => $userId],
-            ['product_id' => []] // initempty array
+            ['product_id' => []]
         );
 
+        // Get current products array
+        $products = $cart->product_id ?? [];
         $found = false;
+        $newProducts = [];
 
-        // Check if product already exists
-        foreach ($cart->product_id as &$item) {
+        // Update quantity if product exists
+        foreach ($products as $item) {
             if ($item['id'] == $productId) {
-                $item['quantity'] += $quantity; // increment quantity
+                $item['quantity'] = $quantity;
                 $found = true;
-                break;
             }
+            $newProducts[] = $item;
         }
 
         if (!$found) {
-            $cart->push('product_id', ['id' => $productId, 'quantity' => $quantity]);
-        } else {
-            $cart->save();
+            $newProducts[] = ['id' => $productId, 'quantity' => $quantity];
         }
 
-        return $cart;
+        // Save back to MongoDB
+        $cart->product_id = $newProducts;
+        $cart->save();
+
+        return redirect()->route('cart');
     }
 
     // Get the user's cart

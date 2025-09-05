@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\BaseControllers\UserCartController;
+
 use App\Http\Controllers\PageControllers\Seller\SellerShopController;
 use App\Http\Controllers\PageControllers\Seller\AddAndUpdateProductController;
 use App\Http\Controllers\PageControllers\Common\AboutUsController;
@@ -46,6 +48,8 @@ Route::middleware([
             ->name('cart');
         Route::get('/checkOutPage', [CheckOutController::class, 'index'])
             ->name('checkOutPage');
+        Route::post('/addToCart', [UserCartController::class, 'addToCart'])
+            ->name('addToCart');
     });
 
     // Admin Routes 
