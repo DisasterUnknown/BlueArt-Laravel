@@ -1,12 +1,5 @@
 <?php
 
-use App\Http\Controllers\BaseControllers\AdminController;
-use App\Http\Controllers\BaseControllers\CustomerController;
-use App\Http\Controllers\BaseControllers\SellerController;
-use App\Http\Controllers\BaseControllers\ProductController;
-use App\Http\Controllers\BaseControllers\SaleController;
-use App\Http\Controllers\BaseControllers\ImageController;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,48 +14,69 @@ use App\Http\Controllers\PageControllers\Admin\ViewBannedController;
 use App\Http\Controllers\PageControllers\Admin\ViewKickController;
 use App\Http\Controllers\PageControllers\Admin\ViewUsersController;
 use App\Http\Controllers\PageControllers\Common\Page404Controller;
+use App\Http\Controllers\PageControllers\Common\Page403Controller;
 
+use App\Http\Middleware\RoleMiddleware;
+
+// Authenticated 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
+
+    // Home 
     Route::get('/pages/common/home', function () {
         return view('pages.common.home');
     })->name('home');
-    
-    Route::get('/sellerShop', [SellerShopController::class, 'index'])
-        ->name('pages.seller.sellerShop');
 
-    // Seller Add and Update Products Rout 
-    Route::get('/addProduct/{product?}', [AddAndUpdateProductController::class, 'index'])
-        ->name('addProduct');
-    Route::post('/add&UpdateProduct', [AddAndUpdateProductController::class, 'store'])->name('add&UpdateProduct');
+    // Seller Routes
+    Route::middleware(RoleMiddleware::class . ':seller')->group(function () {
+        Route::get('/sellerShop', [SellerShopController::class, 'index'])
+            ->name('pages.seller.sellerShop');
+        Route::get('/addProduct/{product?}', [AddAndUpdateProductController::class, 'index'])
+            ->name('addProduct');
+        Route::post('/add&UpdateProduct', [AddAndUpdateProductController::class, 'store'])
+            ->name('add&UpdateProduct');
+    });
 
-    Route::get('/cart', [CartController::class, 'index'])
-        ->name('cart');
-    Route::get('/viewBannedProducts', [ViewBannedController::class, 'index'])
-        ->name('viewBannedProducts');
-    Route::get('/viewKickUsers', [ViewKickController::class, 'index'])
-        ->name('viewKickUsers');
-    Route::get('/viewUsers', [ViewUsersController::class, 'index'])
-        ->name('viewUsers');
-    Route::get('/categoriesPage/{category}', [CategoriesController::class, 'index'])
-        ->name('categoriesPage');
-    Route::get('/checkOutPage', [CheckOutController::class, 'index'])
-        ->name('checkOutPage');
-    Route::get('/viewProductDetails{id}', [ViewProductController::class, 'index'])
-        ->name('viewProductDetails');
+    // Customer Routes
+    Route::middleware(RoleMiddleware::class . ':customer')->group(function () {
+        Route::get('/cart', [CartController::class, 'index'])
+            ->name('cart');
+        Route::get('/checkOutPage', [CheckOutController::class, 'index'])
+            ->name('checkOutPage');
+    });
+
+    // Admin Routes 
+    Route::middleware(RoleMiddleware::class . ':admin')->group(function () {
+        Route::get('/viewBannedProducts', [ViewBannedController::class, 'index'])
+            ->name('viewBannedProducts');
+        Route::get('/viewKickUsers', [ViewKickController::class, 'index'])
+            ->name('viewKickUsers');
+        Route::get('/viewUsers', [ViewUsersController::class, 'index'])
+            ->name('viewUsers');
+    });
+
+    // admin, seller, customer
+    Route::middleware(RoleMiddleware::class . ':admin,seller,customer')->group(function () {
+        Route::get('/categoriesPage/{category}', [CategoriesController::class, 'index'])
+            ->name('categoriesPage');
+        Route::get('/viewProductDetails{id}', [ViewProductController::class, 'index'])
+            ->name('viewProductDetails');
+        Route::get('/403', [Page403Controller::class, 'index'])->name('page403');
+    });
 });
 
+// Public Routes
 Route::get('/', function () {
     return Auth::check()
         ? redirect()->route('home')   // if logged in
         : redirect()->route('login'); // if logged out
 });
 
-
 Route::get('/aboutUs', [AboutUsController::class, 'index'])
     ->name('aboutUs');
 
+// Fallback Route
 Route::fallback([Page404Controller::class, 'index']);
