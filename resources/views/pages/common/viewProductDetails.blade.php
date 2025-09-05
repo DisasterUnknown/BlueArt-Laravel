@@ -68,14 +68,7 @@
                         </a>
                         @else
                         <!-- Buyer sees Add to Cart -->
-                        <form method="POST">
-                            @csrf
-                            <button type="submit"
-                                id="productActionBtn"
-                                class="border hover:bg-white/20 py-2 px-8 mt-5 mb-3 mx-2 md:mx-[10%] md:mt-5 rounded-full transition-colors duration-500">
-                                Add to Cart
-                            </button>
-                        </form>
+                        @livewire('common.add-to-cart', ['productId' => $product->id])
                         @endif
                     </div>
                 </div>
