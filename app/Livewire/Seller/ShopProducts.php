@@ -4,6 +4,7 @@ namespace App\Livewire\Seller;
 
 use Livewire\Component;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ShopProducts extends Component
 {
@@ -12,7 +13,10 @@ class ShopProducts extends Component
     public function mount()
     {
         // Load products with relationships
-        $this->products = Product::with('seller', 'images', 'sales')->where('status', '!=',  'deleted')->get();
+        $this->products = Product::with('seller', 'images', 'sales')
+            ->where('status', '!=',  'deleted')
+            ->where('user_id', Auth::user()->id)
+            ->get();
     }
 
     public function render()

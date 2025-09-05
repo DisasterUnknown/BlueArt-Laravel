@@ -19,17 +19,17 @@ export default function productAlpine(old = {}) {
 
             if (mode == "edit") {
                 const data = JSON.parse(product);
-                if (data.images[0].content) this.previews.main = data.images[0].content;
-                else if (data.images[1].content) this.previews.img1 = data.images[1].content;
-                else if (data.images[2].content) this.previews.img2 = data.images[2].content;
-                else if (data.images[3].content) this.previews.img3 = data.images[3].content;
-                else if (data.images[4].content) this.previews.img4 = data.images[4].content;
+                if (data.images[0]?.content) this.previews.main = data.images[0].content;
+                if (data.images[1]?.content) this.previews.img1 = data.images[1].content;
+                if (data.images[2]?.content) this.previews.img2 = data.images[2].content;
+                if (data.images[3]?.content) this.previews.img3 = data.images[3].content;
+                if (data.images[4]?.content) this.previews.img4 = data.images[4].content;
                 
-                if (data.images[0].content) this.$refs.mainImageBase64.value = data.images[0].content;
-                else if (data.images[1].content) this.$refs.image1Base64.value = data.images[1].content;
-                else if (data.images[2].content) this.$refs.image2Base64.value = data.images[2].content;
-                else if (data.images[3].content) this.$refs.image3Base64.value = data.images[3].content;
-                else if (data.images[4].content) this.$refs.image4Base64.value = data.images[4].content;
+                if (data.images[0]?.content) this.$refs.mainImageBase64.value = data.images[0].content;
+                if (data.images[1]?.content) this.$refs.image1Base64.value = data.images[1].content;
+                if (data.images[2]?.content) this.$refs.image2Base64.value = data.images[2].content;
+                if (data.images[3]?.content) this.$refs.image3Base64.value = data.images[3].content;
+                if (data.images[4]?.content) this.$refs.image4Base64.value = data.images[4].content;
 
                 document.getElementById('productNameIN').value = data.name;
                 document.getElementById('priceIN').value = data.price ? Number(data.price).toLocaleString('en-US') : '';
