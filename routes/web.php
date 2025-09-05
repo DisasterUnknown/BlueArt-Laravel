@@ -47,7 +47,7 @@ Route::middleware([
         ->name('viewKickUsers');
     Route::get('/viewUsers', [ViewUsersController::class, 'index'])
         ->name('viewUsers');
-    Route::get('/categoriesPage', [CategoriesController::class, 'index'])
+    Route::get('/categoriesPage/{category}', [CategoriesController::class, 'index'])
         ->name('categoriesPage');
     Route::get('/checkOutPage', [CheckOutController::class, 'index'])
         ->name('checkOutPage');

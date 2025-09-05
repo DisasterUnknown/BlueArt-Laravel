@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 
 class CategoriesController extends Controller
 {
-    public function index() {
-        return view("pages/common/categoriesPage");
+    public function index($category) {
+        return view("pages/common/categoriesPage", compact('category'));
     }
 }
