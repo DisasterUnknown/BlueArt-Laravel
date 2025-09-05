@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function get()
     {
         $products = Product::with('seller', 'images', 'sales')->get();
         return view('pages.seller.sellerShop', compact('products'));

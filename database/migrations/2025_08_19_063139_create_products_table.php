@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('discount', 5, 2);
             $table->text('description');
             $table->enum('category', ['art', 'collectibles'])->default('art');
-            $table->enum('status', ['active', 'banned', 'userkick'])->default('active');
+            $table->enum('status', ['active', 'banned', 'userkick', 'deleted'])->default('active');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

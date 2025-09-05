@@ -8,7 +8,7 @@ class Sale extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['product_id','customerID','salesDateTime','amount','phoneNumber','address','shippingMethod'];
+    protected $fillable = ['product_id', 'customerID', 'salesDateTime', 'amount', 'phoneNumber', 'address', 'shippingMethod'];
 
     public function product()
     {
@@ -18,5 +18,15 @@ class Sale extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customerID', 'customerID');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'product_id', 'id');
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
