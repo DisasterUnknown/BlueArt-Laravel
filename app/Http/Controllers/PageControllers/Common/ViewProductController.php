@@ -11,6 +11,7 @@ class ViewProductController extends Controller
     public function index($id)
     {
         $product = Product::with('seller', 'images', 'sales')->findOrFail($id);
+        $product->sales->load('customer');
         return view("pages/common/viewProductDetails", compact('product'));
     }
 }

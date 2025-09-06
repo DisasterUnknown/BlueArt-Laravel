@@ -8,11 +8,14 @@
     <div class="space-y-4" id="viewProductDetails">
         <!-- Product Details section -->
         <div class="mx-auto">
-            <p id="productName" class="text-2xl text-center font-bold text-white mt-5 mb-5 md:mb-10">{{ $product->name }}</p>
+            <p id="productName" class="text-2xl text-center font-bold text-white mt-5 mb-5 md:mb-10">
+                {{ $product->name }}
+            </p>
             <div class="flex flex-col md:flex-row justify-center">
 
                 <!-- Main Image -->
-                <div id="mainImg" class="border border-[rgba(0,0,255,0.2)] w-[90%] md:w-[20%] lg:w-[20%] xl:w-[15%] aspect-w-16 h-[300px] md:h-[250px] xl:h-[300px] mx-auto md:mx-1 rounded-2xl bg-cover bg-center hover:scale-101 hover:shadow-[0_0_15px_2px_rgba(100,100,255,0.8)] transition-colors duration-500"
+                <div id="mainImg"
+                    class="border border-[rgba(0,0,255,0.2)] w-[90%] md:w-[20%] lg:w-[20%] xl:w-[15%] aspect-w-16 h-[300px] md:h-[250px] xl:h-[300px] mx-auto md:mx-1 rounded-2xl bg-cover bg-center hover:scale-101 hover:shadow-[0_0_15px_2px_rgba(100,100,255,0.8)] transition-colors duration-500"
                     style="background-image: url('{{ $product->images->first()?->content ?? asset('images/placeholder.png') }}')">
                 </div>
 
@@ -43,13 +46,19 @@
                     <!-- Price -->
                     <div id="priceDiv" class="flex justify-between mx-2 md:mx-[10%] my-3">
                         <p class="text-xl font-semibold">Unit Price:</p>
-                        <p id="productPrice" class="border px-5 md:px-5 w-[50%] md:w-[45%] lg:w-[40%] text-center rounded-xl">Rs. {{ number_format($product->price) }}</p>
+                        <p id="productPrice"
+                            class="border px-5 md:px-5 w-[50%] md:w-[45%] lg:w-[40%] text-center rounded-xl">Rs.
+                            {{ number_format($product->price) }}
+                        </p>
                     </div>
 
                     <!-- Discount -->
                     <div id="discountDiv" class="flex justify-between mx-2 md:mx-[10%] my-3">
                         <p class="text-xl font-semibold">Discount: </p>
-                        <p id="productDiscount" class="border px-5 md:px-5 w-[50%] md:w-[45%] lg:w-[40%] text-center rounded-xl">{{ $product->discount }}%</p>
+                        <p id="productDiscount"
+                            class="border px-5 md:px-5 w-[50%] md:w-[45%] lg:w-[40%] text-center rounded-xl">
+                            {{ $product->discount }}%
+                        </p>
                     </div>
 
                     <!-- Quantity Selector -->
@@ -73,20 +82,22 @@
                     <!-- Action Button -->
                     <div class="text-center">
                         @if(auth()->check() && auth()->id() === $product->user_id)
-                        <a href="{{ route('addProduct', $product->id) }}">
-                            <button type="button" class="border hover:bg-white/20 py-2 px-8 mt-5 mb-3 mx-2 md:mx-[10%] md:mt-5 rounded-full transition-colors duration-500">
-                                Manage Product
+                            <a href="{{ route('addProduct', $product->id) }}">
+                                <button type="button"
+                                    class="border hover:bg-white/20 py-2 px-8 mt-5 mb-3 mx-2 md:mx-[10%] md:mt-5 rounded-full transition-colors duration-500">
+                                    Manage Product
+                                </button>
+                            </a>
+                        @else
+                            @if(session('success'))
+                                <p class="mb-1 text-center text-green-600 font-bold">{{ session('success') }}</p>
+                            @else
+                                <p class="mb-1 text-center text-red-600 font-bold">{{ session('error') }}</p>
+                            @endif
+                            <button type="submit" id="productActionBtn"
+                                class="border hover:bg-white/20 py-2 px-8 mt-5 mb-3 mx-2 md:mx-[10%] md:mt-5 rounded-full transition-colors duration-500">
+                                Add to Cart
                             </button>
-                        </a>
-                        @else
-                        @if(session('success'))
-                        <p class="mb-1 text-center text-green-600 font-bold">{{ session('success') }}</p>
-                        @else
-                        <p class="mb-1 text-center text-red-600 font-bold">{{ session('error') }}</p>
-                        @endif
-                        <button type="submit" id="productActionBtn" class="border hover:bg-white/20 py-2 px-8 mt-5 mb-3 mx-2 md:mx-[10%] md:mt-5 rounded-full transition-colors duration-500">
-                            Add to Cart
-                        </button>
                         @endif
                     </div>
                 </form>
@@ -103,39 +114,59 @@
 
         <!-- Product Images Section -->
         @if ($product->images->count() > 1)
-        <div id="productExtraImgs">
-            <p class="text-2xl text-center font-bold text-white mt-10 md:mt-20 mb-10">Product Gallery</p>
-            <div class="flex flex-col md:flex-row md:flex-wrap justify-center mx-[10%]">
-                @forelse($product->images->slice(1) as $image)
-                <div class="border border-[rgba(0,0,255,0.2)] w-[90%] md:w-[40%] lg:w-[30%] xl:w-[20%] 
-                        h-[280px] mx-auto md:mx-3 my-3 rounded-2xl bg-cover bg-center 
-                        hover:scale-101 hover:shadow-[0_0_15px_2px_rgba(100,100,255,0.8)] 
-                        transition-colors duration-500"
-                    style="background-image: url('{{ $image->content }}')">
+            <div id="productExtraImgs">
+                <p class="text-2xl text-center font-bold text-white mt-10 md:mt-20 mb-10">Product Gallery</p>
+                <div class="flex flex-col md:flex-row md:flex-wrap justify-center mx-[10%]">
+                    @forelse($product->images->slice(1) as $image)
+                        <div class="border border-[rgba(0,0,255,0.2)] w-[90%] md:w-[40%] lg:w-[30%] xl:w-[20%] 
+                                                h-[280px] mx-auto md:mx-3 my-3 rounded-2xl bg-cover bg-center 
+                                                hover:scale-101 hover:shadow-[0_0_15px_2px_rgba(100,100,255,0.8)] 
+                                                transition-colors duration-500"
+                            style="background-image: url('{{ $image->content }}')">
+                        </div>
+                    @empty
+                        <p class="text-gray-400 text-center">No gallery images available.</p>
+                    @endforelse
                 </div>
-                @empty
-                <p class="text-gray-400 text-center">No gallery images available.</p>
-                @endforelse
             </div>
-        </div>
         @endif
 
         <!-- Seller View Sales Section -->
         @if(auth()->check() && auth()->id() === $product->user_id && $product->sales->count() > 0)
-        <div id="productDisplaySales">
-            <p class="text-2xl text-center font-bold text-white mt-10 md:mt-20 mb-10">Product Sales</p>
-            <div id="salesDisplaySection" class="flex flex-col items-center justify-center">
-                @forelse($product->sales as $sale)
-                <div class="border w-full md:w-1/2 my-2 p-3 rounded-lg bg-gray-50">
-                    <p><strong>Buyer:</strong> {{ $sale->buyer->name ?? 'Unknown' }}</p>
-                    <p><strong>Quantity:</strong> {{ $sale->quantity }}</p>
-                    <p><strong>Total:</strong> Rs. {{ number_format($sale->total) }}</p>
+            <div id="productDisplaySales" class="mt-10 md:mt-20">
+                <p class="text-2xl text-center font-bold text-white mt-20 mb-6">Product Sales</p>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full rounded-t-lg overflow-hidden shadow-lg">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="px-4 py-2 text-left">Buyer</th>
+                                <th class="px-4 py-2 text-left">Quantity</th>
+                                <th class="px-4 py-2 text-left">Total Amount</th>
+                                <th class="px-4 py-2 text-left">Phone</th>
+                                <th class="px-4 py-2 text-left">Address</th>
+                                <th class="px-4 py-2 text-left">Shipping Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($product->sales as $sale)
+                                <tr class="border-b border-l border-r rounded-lg hover:bg-gray-100/20">
+                                    <td class="px-4 py-2">{{ $sale->customer->name ?? $sale->customerID }}</td>
+                                    <td class="px-4 py-2">{{ $sale->quantity ?? 1 }}</td>
+                                    <td class="px-4 py-2">Rs. {{ number_format($sale->amount, 2) }}</td>
+                                    <td class="px-4 py-2">{{ $sale->phoneNumber }}</td>
+                                    <td class="px-4 py-2">{{ $sale->address }}</td>
+                                    <td class="px-4 py-2">{{ ucfirst($sale->shippingMethod) }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center py-4 text-gray-500">No sales data available.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
-                @empty
-                <p class="text-gray-400">No sales data available.</p>
-                @endforelse
             </div>
-        </div>
         @endif
     </div>
 
