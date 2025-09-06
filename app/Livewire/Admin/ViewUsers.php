@@ -12,6 +12,7 @@ class ViewUsers extends Component
     public function mount()
     {
         $this->activeUsers = User::where('status', 'active')
+            ->where('role', '!=', 'admin') 
             ->latest()
             ->get();
     }
@@ -24,7 +25,7 @@ class ViewUsers extends Component
         }
 
         // Refresh products
-        $this->activeUsers = User::where('status', 'active')->get();
+        $this->activeUsers = User::where('status', 'active')->where('role', '!=', 'admin')->get();
     }
 
     public function render()

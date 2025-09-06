@@ -1,3 +1,7 @@
+<?php
+use Carbon\Carbon;
+?>
+
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
     @foreach($activeUsers as $index => $user)
     <div class="border border-blue-700 rounded-xl shadow-lg p-4 bg-gradient-to-b from-blue-900/60 via-blue-800/40 to-blue-900/20 text-white hover:shadow-xl transition-shadow duration-300">
@@ -24,13 +28,13 @@
         </div>
         <div class="flex justify-between mb-4">
             <span class="font-medium text-blue-200">Joined:</span>
-            <span>{{ \Carbon\Carbon::parse($user->created_at)->format('d M Y') }}</span>
+            <span>{{ Carbon::parse($user->created_at)->format('d M Y') }}</span>
         </div>
 
         <!-- Kick Button -->
         <div class="text-center">
             <button wire:click="kickUser({{ $user->id }})"
-                    class="bg-white text-blue-900 font-semibold px-4 py-2 rounded-full hover:bg-blue-200 transition-colors duration-300">
+                    class="bg-white text-blue-900 font-semibold px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-300">
                 Kick
             </button>
         </div>
