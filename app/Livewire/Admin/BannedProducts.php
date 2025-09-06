@@ -15,7 +15,6 @@ class BannedProducts extends Component
             $q->where('level', 'main'); }])
             ->where('status', 'banned')
             ->latest()
-            ->take(3)
             ->get();
     }
 
