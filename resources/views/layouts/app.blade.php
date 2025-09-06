@@ -44,7 +44,6 @@
         @include('includes.footer')
     </div>
 
-    @vite(['resources/js/layout.js'])
     @vite(['resources/js/app.js'])
     @livewireScripts
 </body>
