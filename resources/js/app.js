@@ -1,4 +1,5 @@
 import './bootstrap';
+import './layout.js';
 import productAlpine from "./seller/addProductPage.js";
 import checkOutAlpine from "./costomer/checkOutPage.js";
 
