@@ -122,4 +122,14 @@ class ProductController extends Controller
         return redirect()->route('pages.seller.sellerShop')
             ->with('success', 'Product updated successfully!');
     }
+
+    public function remove(Request $request) {
+        $productId = $request->input('product_id');
+        $product = Product::find($productId);
+        if ($product) {
+            $product->update(['status' => 'banned']);
+        }
+
+        return redirect()->route('viewBannedProducts');
+    }
 }

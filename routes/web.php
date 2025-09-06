@@ -48,8 +48,6 @@ Route::middleware([
             ->name('cart');
         Route::get('/checkOutPage', [CheckOutController::class, 'index'])
             ->name('checkOutPage');
-        Route::post('/addToCart', [UserCartController::class, 'addToCart'])
-            ->name('addToCart');
         Route::post('/checkOut', [CheckOutController::class, 'checkOut'])
             ->name('checkOut');
     });
@@ -71,6 +69,11 @@ Route::middleware([
         Route::get('/viewProductDetails{id}', [ViewProductController::class, 'index'])
             ->name('viewProductDetails');
         Route::get('/403', [Page403Controller::class, 'index'])->name('page403');
+    });
+
+    // customer, admin
+    Route::middleware(RoleMiddleware::class . ':admin,customer')->group(function () {
+        Route::post('/addToCart', [ViewProductController::class, 'productManagement'])->name('addToCart');
     });
 });
 

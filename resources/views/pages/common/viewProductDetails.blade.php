@@ -88,6 +88,12 @@
                                     Manage Product
                                 </button>
                             </a>
+                        @elseif(auth()->check() && auth()->user()->role === 'admin')
+                            <input type="hidden" name="action" value="ban">
+                            <button type="submit" id="productActionBtn"
+                                class="border hover:bg-white/20 py-2 px-8 mt-5 mb-3 mx-2 md:mx-[10%] md:mt-5 rounded-full transition-colors duration-500">
+                                Ban Product
+                            </button>
                         @else
                             @if(session('success'))
                                 <p class="mb-1 text-center text-green-600 font-bold">{{ session('success') }}</p>
