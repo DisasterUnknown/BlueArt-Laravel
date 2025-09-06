@@ -8,21 +8,24 @@ class Sale extends Model
 {
     public $timestamps = false;
 
-    protected $fillable = ['product_id', 'customerID', 'salesDateTime', 'amount', 'phoneNumber', 'address', 'shippingMethod'];
+    protected $fillable = [
+        'product_id',
+        'customerID',
+        'salesDateTime',
+        'amount',
+        'phoneNumber',
+        'address',
+        'shippingMethod'
+    ];
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'product_id', 'product_id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'customerID', 'customerID');
-    }
-
-    public function sales()
-    {
-        return $this->hasMany(Sale::class, 'product_id', 'id');
+        return $this->belongsTo(Customer::class, 'customerID', 'id');
     }
 
     public function seller()
@@ -30,3 +33,4 @@ class Sale extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
+

@@ -11,7 +11,7 @@
                     <div class="relative z-10 w-full h-full flex flex-col items-center justify-center">
                         <span class="text-lg text-center font-bold text-white">{{ $item['product']->name }}</span>
                         <span class="text-lg mt-[9%] font-bold text-white">
-                            Rs. {{ number_format($item['product']->price * $item['quantity'], 2) }}
+                            Rs. {{ number_format(($item['product']->price - (($item['product']->price / 100) * $item['product']->discount)) * $item['quantity'], 2) }}
                         </span>
                         <span class="text-sm text-gray-300">Quantity: {{ $item['quantity'] }}</span>
 

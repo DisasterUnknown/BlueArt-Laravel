@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -15,18 +14,15 @@ return new class extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->string('customerID', 10);
+            $table->unsignedBigInteger('customerID'); 
             $table->dateTime('salesDateTime')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->decimal('amount', 3, 0);
+            $table->decimal('amount', 10, 2);
             $table->string('phoneNumber', 15);
             $table->text('address');
             $table->string('shippingMethod', 50);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('sales');

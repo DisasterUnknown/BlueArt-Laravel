@@ -50,6 +50,8 @@ Route::middleware([
             ->name('checkOutPage');
         Route::post('/addToCart', [UserCartController::class, 'addToCart'])
             ->name('addToCart');
+        Route::post('/checkOut', [CheckOutController::class, 'checkOut'])
+            ->name('checkOut');
     });
 
     // Admin Routes 

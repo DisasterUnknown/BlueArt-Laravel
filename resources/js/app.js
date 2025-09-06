@@ -1,7 +1,10 @@
 import './bootstrap';
 import productAlpine from "./seller/addProductPage.js";
+import checkOutAlpine from "./costomer/checkOutPage.js";
 
-// Use the Alpine instance Jetstream already booted
 document.addEventListener('alpine:init', () => {
     window.Alpine.data("productAlpine", productAlpine);
+});
+document.addEventListener('alpine:init', () => {
+    window.Alpine.data("checkOutAlpine", checkOutAlpine);
 });

@@ -34,7 +34,7 @@ class CartPage extends Component
             $product = Product::with('images')->find($item['id']);
             if ($product) {
                 $quantity = $item['quantity'] ?? 1;
-                $subtotal = $product->price * $quantity;
+                $subtotal = ($product->price - (($product->price / 100) * $product->discount)) * $quantity;
 
                 $this->cartItems[] = [
                     'product' => $product,
@@ -57,7 +57,7 @@ class CartPage extends Component
         if ($cart) {
             $productsArray = $cart->product_id;
 
-            // Decode if stored as string
+            // Decode if string
             if (is_string($productsArray)) {
                 $productsArray = json_decode($productsArray, true) ?? [];
             }
@@ -65,12 +65,12 @@ class CartPage extends Component
             // Remove the product
             $productsArray = array_filter($productsArray, fn($item) => $item['id'] != $productId);
 
-            // Save back as proper array
+            // Save as array
             $cart->product_id = array_values($productsArray); // reindex array
             $cart->save();
         }
 
-        $this->mount(); // refresh the component
+        $this->mount();
     }
 
     public function render()
