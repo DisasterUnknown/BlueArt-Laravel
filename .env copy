@@ -27,6 +27,13 @@ DB_DATABASE=BlueArtSSPSem2
 DB_USERNAME=root
 DB_PASSWORD=
 
+MONGO_DB_CONNECTION=mongodb
+MONGO_DB_URI=mongodb+srv://wolfex:wolfex123@blurartcluster.h9nxzi.mongodb.net/BlueArtCart?retryWrites=true&w=majority&appName=BlurArtCluster
+MONGO_DB_DATABASE=BlueArtCart
+MONGO_DB_USERNAME=wolfex
+MONGO_DB_PASSWORD=wolfex123
+MONGO_DB_AUTH_DATABASE=admin
+
 SESSION_DRIVER=database
 SESSION_LIFETIME=120
 SESSION_ENCRYPT=false
