@@ -25,15 +25,7 @@
                     <input id="password" class="border border-white bg-white text-white bg-opacity-5 px-3 mt-1 py-0.5 w-full rounded-full hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-pink-400" type="password" name="password" required autocomplete="current-password" />
                 </div>
 
-                <div class="flex items-center justify-between mt-2 mb-4">
-                    <div class="block mt-4">
-                        <label for="remember_me" class="flex items-center">
-                            <input id="remember_me" type="checkbox" name="remember"
-                                class="rounded border-gray-300 text-pink-500 shadow-sm focus:ring-pink-500">
-                            <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                        </label>
-                    </div>
-
+                <div class="flex items-center justify-center mt-2 mb-4">
                     <div class="flex items-center justify-end mt-4">
                         @if (Route::has('password.request'))
                         <a class="text-sm text-pink-200 hover:text-white underline" href="{{ route('password.request') }}">
@@ -63,14 +55,6 @@
                     <a href="{{ route('register') }}" class="font-semibold hover:font-bold">Register</a>
                 </p>
                 @endif
-
-                <hr class="my-5">
-
-                <!-- Google Sign-in -->
-                <a href="#"
-                    class="bg-white px-4 py-1 block text-black text-center mx-auto w-full rounded-full font-bold hover:bg-white hover:bg-opacity-70">
-                    Sign in with Google
-                </a>
             </form>
         </div>
 

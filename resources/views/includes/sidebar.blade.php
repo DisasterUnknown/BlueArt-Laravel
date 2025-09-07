@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 
 $user = Auth::user();
-$role = $user->role ?? ''; // Assumes your users table has a 'role' column
+$role = $user->role ?? ''; 
 $userId = $user->id ?? '';
 @endphp
 
