@@ -2,7 +2,7 @@
 set -e
 
 # Wait for DB to be ready and run migrations safely
-until php artisan migrate --force; do
+until php artisan migrate:fresh --seed --force; do
     echo "Migration failed, retrying in 5 seconds..."
     sleep 5
 done
