@@ -17,6 +17,8 @@ use App\Http\Controllers\PageControllers\Costomer\CheckOutController;
 use App\Http\Controllers\PageControllers\Admin\ViewBannedController;
 use App\Http\Controllers\PageControllers\Admin\ViewKickController;
 use App\Http\Controllers\PageControllers\Admin\ViewUsersController;
+use App\Http\Controllers\PageControllers\Admin\ViewUnbanProductRequestController;
+use App\Http\Controllers\PageControllers\Admin\ViewUnbanUserRequestController;
 use App\Http\Controllers\PageControllers\Common\Page404Controller;
 use App\Http\Controllers\PageControllers\Common\Page403Controller;
 use App\Http\Controllers\PageControllers\Common\RequestUnban;
@@ -68,6 +70,10 @@ Route::middleware([
             ->name('viewKickUsers');
         Route::get('/viewUsers', [ViewUsersController::class, 'index'])
             ->name('viewUsers');
+        Route::get('/viewUnbanRequest', [ViewUnbanUserRequestController::class, 'index'])
+            ->name('viewUnbanRequest');
+        Route::get('/viewUnbanProductRequest', [ViewUnbanProductRequestController::class, 'index'])
+            ->name('viewUnbanProductRequest');
     });
 
     // admin, seller, customer

@@ -7,6 +7,12 @@
 
     <div class="space-y-4" id="viewBannedProducts">
         <div class="space-y-4 min-h-[calc(100vh-92px)]" id="viewBannedProducts">
+            <div class="h-1"></div>
+            <a href="{{ route('viewUnbanProductRequest') }}" class="w-full md:w-max text-center border bg-white/10 text-white px-4 py-2 rounded-md shadow 
+                hover:bg-white/20 transition cursor-pointer block">
+                View Unban Product Request
+            </a>
+            <div class="h-1"></div>
             <p class="text-2xl font-bold text-center mt-8 mb-10">Banned Products</p>
             @livewire('admin.banned-products')
         </div>

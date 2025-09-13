@@ -46,19 +46,20 @@ class HomePageCategories extends Component
             if ($response->successful()) {
                 $anime = $response->json('data');
 
-                // --- 🚫 Filtering Logic ---
+                // --- Filtering Logic ---
                 $rating = $anime['rating'] ?? '';
                 $genres = collect($anime['genres'])->pluck('name')->toArray();
                 $explicit = collect($anime['explicit_genres'])->pluck('name')->toArray();
 
                 if (
                     str_contains(strtolower($rating), 'hentai') ||
-                    str_contains(strtolower($rating), 'rx') ||     // "Rx - Hentai"
+                    str_contains(strtolower($rating), 'rx') ||     
                     in_array('Hentai', $genres) ||
                     in_array('Erotica', $genres) ||
+                    in_array('Ecchi', $genres) ||
                     !empty($explicit)
                 ) {
-                    continue; // skip this anime
+                    continue; // skip 
                 }
 
                 $animeList[] = $anime;

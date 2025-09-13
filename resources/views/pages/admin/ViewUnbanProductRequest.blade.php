@@ -7,8 +7,7 @@
 
     <div class="space-y-4" id="viewUsers">
         <div class="space-y-4 min-h-[calc(100vh-92px)]" id="viewUsersPage">
-            <p class="text-2xl font-bold text-center mt-8 mb-10">View Users</p>
-            @livewire('admin.view-users')
+            @livewire('admin.view-unban-product-request')
         </div>
     </div>
 </x-app-layout>
