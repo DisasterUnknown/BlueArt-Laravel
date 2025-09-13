@@ -24,14 +24,18 @@
         @endforeach
     </div>
 
-    <p class="text-2xl font-bold text-center mt-8 mb-10">Inventory Hub</p>
+    <a href="{{ route('salesPage') }}" class="border bg-white/10 text-white px-4 py-2 rounded-md shadow hover:bg-white/20 transition cursor-pointer">
+        View Sales History
+    </a>
+
+    <p class="text-2xl font-bold text-center mt-5 mb-10">Inventory Hub</p>
 
     <div class="flex flex-row flex-wrap justify-evenly mt-8">
         <!-- Products  -->
         @foreach($products as $product)
             <div wire:click="viewProduct({{ $product->id }})" class="border my-5 md:mx-5 w-[40%] md:w-[20%] lg:w-[20%] xl:w-[15%] 
-                                        rounded-2xl hover:scale-105 hover:shadow-[0_0_15px_2px_rgba(255,255,255,0.8)] 
-                                        transition-transform duration-300">
+                                                rounded-2xl hover:scale-105 hover:shadow-[0_0_15px_2px_rgba(255,255,255,0.8)] 
+                                                transition-transform duration-300">
 
                 {{-- Hidden Product ID --}}
                 <div class="hidden">{{ $product->id }}</div>
@@ -52,9 +56,9 @@
 
                     <div class="flex items-center justify-center">
                         <button wire:click.stop="removeProduct({{ $product->id }})" class="border py-2 px-4 mt-2 mb-1 mx-auto rounded-xl 
-                                                hover:bg-red-500/60 hover:scale-105 
-                                                hover:shadow-[0_0_15px_2px_rgba(255,0,255,0.8)] 
-                                                transition-transform duration-300">
+                                                        hover:bg-red-500/60 hover:scale-105 
+                                                        hover:shadow-[0_0_15px_2px_rgba(255,0,255,0.8)] 
+                                                        transition-transform duration-300">
                             Remove
                         </button>
                     </div>

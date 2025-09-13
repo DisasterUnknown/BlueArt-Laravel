@@ -44,7 +44,7 @@
                         <input type="text" placeholder="Card&nbsp;Number:" x-model="cardNumber" @input="formatCard"
                             name="cardNumber" value="{{ old('cardNumber') }}"
                             class="border border-balck bg-white text-white bg-opacity-5 px-3 py-0.5 mb-3 w-full rounded-full hover:bg-opacity-10"
-                            id="cardNumberIN" minlength="13" maxlength="23">
+                            id="cardNumberIN" minlength="13" maxlength="19">
                     </div>
                     <div class="flex flex-row justify-between mb-2">
                         <input type="text" placeholder="CVC:" name="CVC" x-model="cvc" @input="formatCVC"

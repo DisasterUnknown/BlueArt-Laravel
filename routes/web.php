@@ -8,6 +8,7 @@ use App\Http\Controllers\BaseControllers\UserCartController;
 use App\Http\Controllers\PageControllers\Seller\SellerShopController;
 use App\Http\Controllers\PageControllers\Seller\AddAndUpdateProductController;
 use App\Http\Controllers\PageControllers\Seller\RequestUnbanProductController;
+use App\Http\Controllers\PageControllers\Seller\salesPageController;
 use App\Http\Controllers\PageControllers\Common\AboutUsController;
 use App\Http\Controllers\PageControllers\Common\CategoriesController;
 use App\Http\Controllers\PageControllers\Common\ViewProductController;
@@ -39,6 +40,8 @@ Route::middleware([
             ->name('pages.seller.sellerShop');
         Route::get('/addProduct/{product?}', [AddAndUpdateProductController::class, 'index'])
             ->name('addProduct');
+        Route::get('/salesPage', [salesPageController::class, 'index'])
+            ->name('salesPage');
         Route::get('/requestUnbanProduct/{product?}', [RequestUnbanProductController::class, 'index'])
             ->name('requestUnbanProduct');
         Route::post('/postRequestUnbanProduct', [RequestUnbanProductController::class, 'store'])
