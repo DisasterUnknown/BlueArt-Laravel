@@ -17,6 +17,7 @@ use App\Http\Controllers\PageControllers\Admin\ViewKickController;
 use App\Http\Controllers\PageControllers\Admin\ViewUsersController;
 use App\Http\Controllers\PageControllers\Common\Page404Controller;
 use App\Http\Controllers\PageControllers\Common\Page403Controller;
+use App\Http\Controllers\PageControllers\Common\RequestUnban;
 
 use App\Http\Middleware\RoleMiddleware;
 
@@ -26,7 +27,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-
     // Home 
     Route::get('/pages/common/home', function () {
         return view('pages.common.home');
@@ -86,6 +86,11 @@ Route::get('/', function () {
 
 Route::get('/aboutUs', [AboutUsController::class, 'index'])
     ->name('aboutUs');
+
+Route::get('/requestUnban', [RequestUnban::class, 'index'])
+    ->name('requestUnban');
+Route::post('/requestUnban', [RequestUnban::class, 'store'])
+    ->name('requestUnban');
 
 // Fallback Route
 Route::fallback([Page404Controller::class, 'index']);

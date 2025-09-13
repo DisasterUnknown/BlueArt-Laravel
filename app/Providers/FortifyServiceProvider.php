@@ -15,6 +15,7 @@ use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
 use Laravel\Fortify\Fortify;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -41,6 +42,12 @@ class FortifyServiceProvider extends ServiceProvider
             $user = User::where('email', $request->email)->first();
 
             if ($user && Hash::check($request->password, $user->password)) {
+                if ($user->status === 'kicked') {
+                    throw ValidationException::withMessages([
+                        'email' => __('Your account has been suspended.'),
+                    ]);
+                }
+
                 return $user;
             }
         });
