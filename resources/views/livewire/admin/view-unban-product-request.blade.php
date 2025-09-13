@@ -1,7 +1,7 @@
 <div class="p-4">
     @if($requests->isEmpty())
         <div id="noProductCartId" class="flex items-center justify-center min-h-[calc(100vh-92px)]">
-            <p class="text-6xl text-center font-bold">No pending unban requests.</p>
+            <p class="text-3xl text-center text-gray-500 font-bold">No pending unban requests.</p>
         </div>
     @else
         <p class="text-2xl font-bold text-center mt-8 mb-10">Unban Product Request</p>
