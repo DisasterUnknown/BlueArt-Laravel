@@ -1,9 +1,4 @@
 <div class="space-y-8">
-    {{-- If both empty --}}
-    @if($artProducts->isEmpty() && $collectiblesProducts->isEmpty())
-        <p class="text-center text-gray-400 text-lg font-bold mt-10">eShop empty</p>
-    @endif
-
     {{-- Anime Section --}}
     @if(!empty($randomAnime))
         <div>
@@ -133,5 +128,10 @@
                 </a>
             </div>
         </div>
+    @endif
+
+    {{-- If both empty --}}
+    @if($artProducts->isEmpty() && $collectiblesProducts->isEmpty())
+        <p class="text-center text-gray-400 text-lg font-bold mt-10">eShop empty</p>
     @endif
 </div>

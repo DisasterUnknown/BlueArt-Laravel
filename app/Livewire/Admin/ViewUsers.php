@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Product;
 
 class ViewUsers extends Component
 {
@@ -19,9 +20,13 @@ class ViewUsers extends Component
 
     public function kickUser($id)
     {
-        $product = User::find($id);
-        if ($product) {
-            $product->update(['status' => 'kicked']);
+        $user = User::find($id);
+        if ($user) {
+            $user->update(['status' => 'kicked']);
+        }
+
+        if ($user->role === 'seller') {
+            Product::where('user_id', $user->id)->update(['status' => 'banned']);
         }
 
         // Refresh products

@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Product;
 
 class ViewKickUsers extends Component
 {
@@ -18,9 +19,13 @@ class ViewKickUsers extends Component
 
     public function restoreUser($id)
     {
-        $product = User::find($id);
-        if ($product) {
-            $product->update(['status' => 'active']);
+        $user = User::find($id);
+        if ($user) {
+            $user->update(['status' => 'active']);
+        }
+
+        if ($user->role === 'seller') {
+            Product::where('user_id', $user->id)->update(['status' => 'active']);
         }
 
         // Refresh products
