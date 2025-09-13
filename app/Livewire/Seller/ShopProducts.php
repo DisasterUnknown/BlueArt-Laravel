@@ -15,15 +15,16 @@ class ShopProducts extends Component
     {
         // Load products with relationships
         $this->products = Product::with('seller', 'images', 'sales')
-            ->where('status', '!=',  'deleted')
-            ->where('status', '!=',  'banned')
+            ->where('status', '!=', 'deleted')
+            ->where('status', '!=', 'banned')
             ->where('user_id', Auth::user()->id)
             ->get();
 
         $this->bannedProducts = Product::with('seller', 'images', 'sales')
-            ->where('status', '!=',  'deleted')
-            ->where('status', '!=',  'active')
+            ->where('status', '!=', 'deleted')
+            ->where('status', '!=', 'active')
             ->where('user_id', Auth::user()->id)
+            ->whereDoesntHave('unbanRequests')
             ->get();
     }
 
@@ -40,7 +41,7 @@ class ShopProducts extends Component
         }
 
         // Refresh products
-        $this->products = Product::with('seller', 'images', 'sales')->where('status', '!=',  'deleted')->get();
+        $this->products = Product::with('seller', 'images', 'sales')->where('status', '!=', 'deleted')->get();
     }
 
     public function viewProduct($id)

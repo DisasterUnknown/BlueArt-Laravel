@@ -5,6 +5,8 @@ namespace App\Http\Controllers\BaseControllers;
 use App\Models\Product;
 use App\Models\Image;
 use App\Models\Seller;
+use Illuminate\Support\Facades\Auth;
+use App\Models\RequestUnbanProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -123,7 +125,8 @@ class ProductController extends Controller
             ->with('success', 'Product updated successfully!');
     }
 
-    public function remove(Request $request) {
+    public function remove(Request $request)
+    {
         $productId = $request->input('product_id');
         $product = Product::find($productId);
         if ($product) {
@@ -131,5 +134,39 @@ class ProductController extends Controller
         }
 
         return redirect()->route('viewBannedProducts');
+    }
+
+    public function requestUnban(Request $request)
+    {
+        $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'message' => 'required|string|min:5|max:1000',
+        ]);
+
+        $productId = $validated['product_id'];
+        $userId = Auth::id();
+
+        // Check if a request already exists for this user & product
+        $existingRequest = RequestUnbanProduct::where('product_id', $productId)
+            ->where('user_id', $userId)
+            ->first();
+
+        if ($existingRequest) {
+            if ($existingRequest->status === 'pending') {
+                return redirect()->back()->with('error', 'Your previous unban request for this product is still under review.');
+            } elseif ($existingRequest->status === 'dismissed') {
+                return redirect()->back()->with('error', 'Your previous unban request for this product was dismissed. You cannot request again.');
+            }
+        }
+
+        // Create unban request
+        RequestUnbanProduct::create([
+            'product_id' => $productId,
+            'user_id' => $userId,
+            'message' => $validated['message'],
+            'status' => 'pending',
+        ]);
+
+        return redirect()->back()->with('success', 'Your unban request has been submitted. Admins will review it shortly.');
     }
 }

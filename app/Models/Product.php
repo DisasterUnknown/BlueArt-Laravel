@@ -24,4 +24,9 @@ class Product extends Model
     {
         return $this->hasMany(Sale::class, 'product_id', 'id');
     }
+
+    public function unbanRequests()
+    {
+        return $this->hasMany(RequestUnbanProduct::class, 'product_id', 'id');
+    }
 }
