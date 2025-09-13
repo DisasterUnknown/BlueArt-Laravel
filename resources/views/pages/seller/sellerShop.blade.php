@@ -7,7 +7,6 @@
 
     <div class="space-y-4" id="sellerShop">
         <div class="space-y-4 min-h-[calc(100vh-92px)]" id="sellerShopPage">
-            <p class="text-2xl font-bold text-center mt-8 mb-10">Inventory Hub</p>
             @livewire('seller.shop-products')
         </div>
     </div>

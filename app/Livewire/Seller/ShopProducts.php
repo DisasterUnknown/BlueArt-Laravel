@@ -9,12 +9,20 @@ use Illuminate\Support\Facades\Auth;
 class ShopProducts extends Component
 {
     public $products;
+    public $bannedProducts;
 
     public function mount()
     {
         // Load products with relationships
         $this->products = Product::with('seller', 'images', 'sales')
             ->where('status', '!=',  'deleted')
+            ->where('status', '!=',  'banned')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+
+        $this->bannedProducts = Product::with('seller', 'images', 'sales')
+            ->where('status', '!=',  'deleted')
+            ->where('status', '!=',  'active')
             ->where('user_id', Auth::user()->id)
             ->get();
     }
