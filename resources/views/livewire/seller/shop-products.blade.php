@@ -1,11 +1,5 @@
 <div>
     <div class="mt-5 space-y-3">
-        <a href="{{ route('salesPage') }}"
-            class="border bg-white/10 text-white px-4 py-2 rounded-md shadow hover:bg-white/20 transition cursor-pointer">
-            View Sales History
-        </a>
-        <div class="h-1"></div>
-
         @foreach($bannedProducts as $bannedProduct)
             <div x-data="{ show: true }" x-show="show"
                 class="relative w-full bg-red-600/20 text-white font-bold px-4 py-3 rounded-xl shadow-md cursor-pointer md:cursor-auto"
