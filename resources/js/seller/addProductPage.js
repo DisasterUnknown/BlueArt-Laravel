@@ -13,18 +13,15 @@ export default function productAlpine(old = {}) {
         product: old.product || null,
 
         init() {
-            // observe backend responseconst 
-            const mode = this.mode; // now reactive
-            const product = this.product;
+            const data = this.product;
 
-            if (mode == "edit") {
-                const data = JSON.parse(product);
+            if (this.mode == "edit") {
                 if (data.images[0]?.content) this.previews.main = data.images[0].content;
                 if (data.images[1]?.content) this.previews.img1 = data.images[1].content;
                 if (data.images[2]?.content) this.previews.img2 = data.images[2].content;
                 if (data.images[3]?.content) this.previews.img3 = data.images[3].content;
                 if (data.images[4]?.content) this.previews.img4 = data.images[4].content;
-                
+
                 if (data.images[0]?.content) this.$refs.mainImageBase64.value = data.images[0].content;
                 if (data.images[1]?.content) this.$refs.image1Base64.value = data.images[1].content;
                 if (data.images[2]?.content) this.$refs.image2Base64.value = data.images[2].content;

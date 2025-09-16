@@ -12,7 +12,7 @@
             oldImg3: '{{ old('image3Base64', $product->images[2] ?? '') }}',
             oldImg4: '{{ old('image4Base64', $product->images[3] ?? '') }}',
             mode: '{{ $mode ?? 'Add' }}',
-            product: '{{ $product ?? '' }}'
+            product: @js($product ?? null)
         })" x-init="init()">
 
         <!-- Page Maintainence Section -->
