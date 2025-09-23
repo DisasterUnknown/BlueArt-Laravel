@@ -20,6 +20,9 @@ Get: http://127.0.0.1:8000/api/products
 4) Get Limited active Products
 Get: http://127.0.0.1:8000/api/products/{value} 
 
+4) Get Products According to Category
+Get: http://127.0.0.1:8000/api/products/category/{category} 
+
 5) Get all the sales
 Get: http://127.0.0.1:8000/api/sales
 

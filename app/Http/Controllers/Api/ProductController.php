@@ -19,7 +19,7 @@ class ProductController extends Controller
         ]);
     }
 
-    // Show single product
+    // Show limited product
     public function show($limit)
     {
         $product = Product::with('images', 'seller', 'sales.customer')
@@ -30,6 +30,27 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Product not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $product
+        ]);
+    }
+
+    // Get with category
+    public function category($category)
+    {
+        $product = Product::with('images', 'seller', 'sales.customer')
+            ->where('status', 'active')
+            ->where('category', $category)
+            ->get();
+
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Products not found'
             ], 404);
         }
 
