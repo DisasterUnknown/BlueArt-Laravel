@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
         // =================================================================
         // =================================================================
         // Cresting Art Products
-        Product::create([
+        $product1 = Product::create([
             'user_id' => 3,
             'name' => 'Bleach Metal Poster',
             'price' => 1000,
@@ -72,24 +72,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 1,
+            'product_id' => $product1->id,
             'content' => $this->imageToBase64('art/product1/img1.webp'),
             'level' => 'main',
         ]);
         Image::create([
-            'product_id' => 1,
+            'product_id' => $product1->id,
             'content' => $this->imageToBase64('art/product1/img2.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 1,
+            'product_id' => $product1->id,
             'content' => $this->imageToBase64('art/product1/img3.webp'),
             'level' => 'sub',
         ]);
 
 
-        // Art 3
-        Product::create([
+        // Art 2
+        $product2 = Product::create([
             'user_id' => 3,
             'name' => 'Metal Art Gojo',
             'price' => 20000,
@@ -100,14 +100,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 3,
+            'product_id' => $product2->id,
             'content' => $this->imageToBase64('art/product3/img1.jpg'),
             'level' => 'main',
         ]);
 
 
-        // Art 4
-        Product::create([
+        // Art 3
+        $product3 = Product::create([
             'user_id' => 3,
             'name' => 'Metal Art Kyojuro Rengoku',
             'price' => 30000,
@@ -118,14 +118,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 4,
+            'product_id' => $product3->id,
             'content' => $this->imageToBase64('art/product4/img1.jpg'),
             'level' => 'main',
         ]);
 
 
-        // Art 5
-        Product::create([
+        // Art 4
+        $product4 = Product::create([
             'user_id' => 3,
             'name' => 'Bleach Metal Poster',
             'price' => 15000,
@@ -136,24 +136,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 5,
+            'product_id' => $product4->id,
             'content' => $this->imageToBase64('art/product5/img1.webp'),
             'level' => 'main',
         ]);
         Image::create([
-            'product_id' => 5,
+            'product_id' => $product4->id,
             'content' => $this->imageToBase64('art/product5/img2.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 5,
+            'product_id' => $product4->id,
             'content' => $this->imageToBase64('art/product5/img3.webp'),
             'level' => 'sub',
         ]);
 
 
-        // Art 6
-        Product::create([
+        // Art 5
+        $product5 = Product::create([
             'user_id' => 3,
             'name' => 'Bleach Anime Metal Poster',
             'price' => 75000,
@@ -164,24 +164,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 6,
+            'product_id' => $product5->id,
             'content' => $this->imageToBase64('art/product6/img1.webp'),
             'level' => 'main',
         ]);
         Image::create([
-            'product_id' => 6,
+            'product_id' => $product5->id,
             'content' => $this->imageToBase64('art/product6/img2.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 6,
+            'product_id' => $product5->id,
             'content' => $this->imageToBase64('art/product6/img3.webp'),
             'level' => 'sub',
         ]);
 
 
-        // Art 7
-        Product::create([
+        // Art 6
+        $product6 = Product::create([
             'user_id' => 3,
             'name' => 'Bleach: Metal Poster',
             'price' => 75000,
@@ -192,22 +192,22 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 7,
+            'product_id' => $product6->id,
             'content' => $this->imageToBase64('art/product7/img1.webp'),
             'level' => 'main',
         ]);
         Image::create([
-            'product_id' => 7,
+            'product_id' => $product6->id,
             'content' => $this->imageToBase64('art/product7/img2.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 7,
+            'product_id' => $product6->id,
             'content' => $this->imageToBase64('art/product7/img3.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 7,
+            'product_id' => $product6->id,
             'content' => $this->imageToBase64('art/product7/img4.webp'),
             'level' => 'sub',
         ]);
@@ -217,7 +217,7 @@ class DatabaseSeeder extends Seeder
         // =================================================================
         // =================================================================
         // Collectable 1
-        Product::create([
+        $product7 = Product::create([
             'user_id' => 3,
             'name' => 'Action Figure Monkey D. Luffy',
             'price' => 750000,
@@ -228,14 +228,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 8,
+            'product_id' => $product7->id,
             'content' => $this->imageToBase64('collectibles/product1/img1.webp'),
             'level' => 'main',
         ]);
 
 
         // Collectable 2
-        Product::create([
+        $product8 = Product::create([
             'user_id' => 3,
             'name' => 'Action Figure Monkey D. Luffy',
             'price' => 620000,
@@ -246,14 +246,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 9,
+            'product_id' => $product8->id,
             'content' => $this->imageToBase64('collectibles/product2/img1.avif'),
             'level' => 'main',
         ]);
 
 
         // Collectable 3
-        Product::create([
+        $product9 = Product::create([
             'user_id' => 3,
             'name' => 'Action Figure Hu Tao',
             'price' => 800000,
@@ -264,34 +264,34 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 10,
+            'product_id' => $product9->id,
             'content' => $this->imageToBase64('collectibles/product3/img1.webp'),
             'level' => 'main',
         ]);
         Image::create([
-            'product_id' => 10,
+            'product_id' => $product9->id,
             'content' => $this->imageToBase64('collectibles/product3/img2.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 10,
+            'product_id' => $product9->id,
             'content' => $this->imageToBase64('collectibles/product3/img3.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 10,
+            'product_id' => $product9->id,
             'content' => $this->imageToBase64('collectibles/product3/img4.webp'),
             'level' => 'sub',
         ]);
         Image::create([
-            'product_id' => 10,
+            'product_id' => $product9->id,
             'content' => $this->imageToBase64('collectibles/product3/img5.webp'),
             'level' => 'sub',
         ]);
 
 
         // Collectable 4
-        Product::create([
+        $product10 = Product::create([
             'user_id' => 3,
             'name' => 'Action Figure Hu Tao',
             'price' => 100000,
@@ -302,7 +302,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Image::create([
-            'product_id' => 11,
+            'product_id' => $product10->id,
             'content' => $this->imageToBase64('collectibles/product4/img1.jpeg'),
             'level' => 'main',
         ]);
