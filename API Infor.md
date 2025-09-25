@@ -34,3 +34,29 @@ Get: http://127.0.0.1:8000/api/user
 
 8) Logging out
 Post: http://127.0.0.1:8000/api/logout
+
+9) Get user cart
+Get: http://127.0.0.1:8000/api/cart
+
+10) Add product to user cart
+Post: http://127.0.0.1:8000/api/cart/add
+{
+  "product_id": "prod123",
+  "quantity": 2
+}
+
+11) Remove product to user cart
+Post: http://127.0.0.1:8000/api/cart/remove/{productId}
+{
+  "success": true,
+  "message": "Product removed from cart",
+  "data": { ...updated cart object... }
+}
+
+12) Clear Cart
+Delete: http://127.0.0.1:8000/api/cart/clear
+{
+  "success": true,
+  "message": "Cart cleared",
+  "data": { ...empty cart object... }
+}

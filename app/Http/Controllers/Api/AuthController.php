@@ -28,6 +28,10 @@ class AuthController extends Controller
             return response()->json(['message' => 'User is kicked and cannot log in'], 403);
         }
 
+        if ($user->role != 'customer') {
+            return response()->json(['message' => 'You are not a customer'], 403);
+        }
+
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json([

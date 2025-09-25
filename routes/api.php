@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\SaleController;
 use Illuminate\Http\Request;
@@ -22,4 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Sales
     Route::get('/sales', [SaleController::class, 'index']);
     Route::get('/sales/{id}', [SaleController::class, 'show']);
+    
+    // Cart
+    Route::get('/cart', [CartController::class, 'getUserCart']);        
+    Route::post('/cart/add', [CartController::class, 'addToCart']);     
+    Route::delete('/cart/remove/{productId}', [CartController::class, 'removeItem']);
+    Route::delete('/cart/clear', [CartController::class, 'clearCart']); 
 });
