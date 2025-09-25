@@ -88,24 +88,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        // Art 2
-        Product::create([
-            'user_id' => 3,
-            'name' => 'Metal Art Ryomen Sukuna',
-            'price' => 5000,
-            'discount' => 5,
-            'description' => "Bring the raw power of the King of Curses to your space with this premium metal wall art featuring Ryomen Sukuna from Jujutsu Kaisen. Crafted with precision laser-cut detailing and finished in sleek matte black with crimson accents, this piece radiates intensity and style. Perfect for anime fans, collectors, or anyone looking to add a touch of dark elegance to their decor. 🔥 Material: High-quality stainless steel / alloy with anti-rust coating 📐 Size: 18 x 24 inches (custom sizes available) 🎨 Finish: Matte black base with optional red highlights 🧲 Mounting: Easy wall-mount setup included (magnet or screw mount) ✨ Vibe: Dark, powerful, aesthetic — a true centerpiece 💀 Unleash the curse. Hang the legend.",
-            'category' => 'art',
-            'status' => 'active',
-        ]);
-
-        Image::create([
-            'product_id' => 2,
-            'content' => $this->imageToBase64('art/product2/img1.png'),
-            'level' => 'main',
-        ]);
-
-
         // Art 3
         Product::create([
             'user_id' => 3,
