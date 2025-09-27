@@ -1,4 +1,4 @@
-APP_NAME=Laravel
+APP_NAME=BlueArt
 APP_ENV=local
 APP_KEY=base64:2JMI4mJGVvrfyOqRI4hRi10lKOgeBlNSfSzdodNROF8=
 APP_DEBUG=true
