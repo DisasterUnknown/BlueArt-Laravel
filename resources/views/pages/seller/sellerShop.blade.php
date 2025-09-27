@@ -13,7 +13,7 @@
                 View Sales History
             </a>
             <div class="h-1"></div>
-            @livewire('seller.shop-products')
+            <livewire:seller.shop-products />
         </div>
     </div>
 </x-app-layout>

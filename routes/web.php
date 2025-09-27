@@ -14,6 +14,7 @@ use App\Http\Controllers\PageControllers\Common\CategoriesController;
 use App\Http\Controllers\PageControllers\Common\ViewProductController;
 use App\Http\Controllers\PageControllers\Costomer\CartController;
 use App\Http\Controllers\PageControllers\Costomer\CheckOutController;
+use App\Http\Controllers\PageControllers\Costomer\TransactionHistoryController;
 use App\Http\Controllers\PageControllers\Admin\ViewBannedController;
 use App\Http\Controllers\PageControllers\Admin\ViewKickController;
 use App\Http\Controllers\PageControllers\Admin\ViewUsersController;
@@ -56,6 +57,8 @@ Route::middleware([
     Route::middleware(RoleMiddleware::class . ':customer')->group(function () {
         Route::get('/cart', [CartController::class, 'index'])
             ->name('cart');
+        Route::get('/transactionHistoryPage', [TransactionHistoryController::class, 'index'])
+            ->name('transactionHistoryPage');
         Route::get('/checkOutPage', [CheckOutController::class, 'index'])
             ->name('checkOutPage');
         Route::post('/checkOut', [CheckOutController::class, 'checkOut'])
