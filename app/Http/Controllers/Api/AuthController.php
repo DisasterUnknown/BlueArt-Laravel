@@ -93,7 +93,7 @@ class AuthController extends Controller
     {
         $request->validate([
             'old_password' => 'required|string',
-            'new_password' => 'required|string|confirmed|min:8', 
+            'new_password' => 'required|string|confirmed|min:8',
         ]);
 
         $user = $request->user();
@@ -107,11 +107,8 @@ class AuthController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        // Optionally, revoke all existing tokens for security
-        $user->tokens()->delete();
-
         return response()->json([
-            'message' => 'Password updated successfully. Please login again.',
+            'message' => 'Password updated successfully.',
         ]);
     }
 }
