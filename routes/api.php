@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\SaleController;
@@ -14,6 +15,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // User
     Route::get('/user', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/updateUser', [UserController::class, 'updateProfile']);
 
     // Products
     Route::get('/products', [ProductController::class, 'index']);
