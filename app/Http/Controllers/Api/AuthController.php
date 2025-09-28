@@ -104,7 +104,7 @@ class AuthController extends Controller
         }
 
         // Update password
-        $user->password = Hash::make($request->new_password);
+        $user->password = $request->new_password;
         $user->save();
 
         return response()->json([
