@@ -87,4 +87,31 @@ class AuthController extends Controller
     {
         return response()->json($request->user());
     }
+
+    // Reset password for authenticated users
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required|string',
+            'new_password' => 'required|string|confirmed|min:8', 
+        ]);
+
+        $user = $request->user();
+
+        // Check old password
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json(['message' => 'Old password is incorrect'], 403);
+        }
+
+        // Update password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        // Optionally, revoke all existing tokens for security
+        $user->tokens()->delete();
+
+        return response()->json([
+            'message' => 'Password updated successfully. Please login again.',
+        ]);
+    }
 }
