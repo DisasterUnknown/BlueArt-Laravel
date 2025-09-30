@@ -25,7 +25,7 @@ class ViewUnbanProductRequest extends Component
     {
         $request = RequestUnbanProduct::find($requestId);
 
-        if ($request) {
+        if ($request && $request->product) {
             // Update product status to active
             $request->product->update(['status' => 'active']);
 
@@ -40,7 +40,7 @@ class ViewUnbanProductRequest extends Component
     {
         $request = RequestUnbanProduct::find($requestId);
 
-        if ($request) {
+        if ($request && $request->product) {
             // Keep product status as is
             $request->update(['status' => 'dismissed']);
 

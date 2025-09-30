@@ -12,10 +12,10 @@
 
                     {{-- Product Info --}}
                     <div>
-                        <h3 class="text-lg font-bold">{{ $request->product->name }}</h3>
+                        <h3 class="text-lg font-bold">{{ $request->product?->name ?? 'Deleted Product' }}</h3>
                         <p class="text-sm text-gray-400">Price: Rs. {{ number_format($request->product->price, 2) }}</p>
                         <p class="mt-2 text-gray-700 dark:text-gray-300">
-                            <span class="font-semibold">Seller:</span> {{ $request->user->name }}
+                            <span class="font-semibold">Seller:</span> {{ $request->user?->name ?? 'Unknown' }}
                         </p>
                         <p class="mt-2 text-gray-700 dark:text-gray-300">
                             <span class="font-semibold">Reason:</span> {{ $request->message }}
