@@ -11,4 +11,4 @@ class ViewUnbanProductRequestController extends Controller
     {
         return view('pages.admin.viewUnbanProductRequest');
     }
-}
+} 
