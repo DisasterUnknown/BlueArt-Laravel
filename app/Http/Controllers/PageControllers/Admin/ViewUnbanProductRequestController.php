@@ -9,6 +9,6 @@ class ViewUnbanProductRequestController extends Controller
 {
     public function index()
     {
-        return view('pages.admin.viewUnbanProductRequest');
+        return view('pages/admin/viewUnbanProductRequest');
     }
 } 
